@@ -13,6 +13,7 @@ build
 .DS_Store
 **/.DS_Store
 .env
+.env.dist
 .env.local
 .env.development
 .env.development.local

@@ -5,6 +5,7 @@ ADD package.json /package.json
 
 ENV NODE_PATH=/node_modules
 ENV PATH=$PATH:/node_modules/.bin
+ENV CHOKIDAR_USEPOLLING=true
 
 RUN yarn
 

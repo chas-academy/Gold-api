@@ -5,7 +5,11 @@ module.exports = {
       service_id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "services",
+          key: "id"
+        }
       },
       address: {
         allowNull: false,

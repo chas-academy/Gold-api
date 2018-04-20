@@ -9,7 +9,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       client_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "customers",
+          key: "user_id"
+        }
       },
       order_type: {
         allowNull: false,

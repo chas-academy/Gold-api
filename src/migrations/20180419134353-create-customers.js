@@ -5,7 +5,11 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        references: {
+          model: "users",
+          key: "id"
+        }
       },
       type: {
         type: Sequelize.ENUM("private", "company")

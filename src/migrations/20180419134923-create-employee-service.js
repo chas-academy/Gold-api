@@ -3,10 +3,18 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('employee_services', {
       employee_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "users",
+          key: "id"
+        }
       },
       service_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "services",
+          key: "id"
+        }
       }
     });
   },

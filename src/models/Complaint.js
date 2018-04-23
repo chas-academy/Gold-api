@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Complaint = sequelize.define('complaints', {
+  var Complaint = sequelize.define('complaint', {
     service_id: {
       primaryKey: true,
       type: DataTypes.INTEGER
@@ -22,5 +22,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  return complaints;
+  return Complaint;
 };

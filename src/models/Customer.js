@@ -1,8 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Customer = sequelize.define('customers', {
+  var Customer = sequelize.define('customer', {
     user_id: DataTypes.INTEGER,
-    type: DataTypes.ENUM,
+    type: {
+      type: DataTypes.ENUM,
+      values: [
+        "private",
+        "company"
+      ]
+    },
     email: DataTypes.STRING,
     tel: DataTypes.STRING,
     address: DataTypes.TEXT

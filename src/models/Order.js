@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Order = sequelize.define('orders', {
+  var Order = sequelize.define('order', {
     service_id: {
       primaryKey: true,
       type: DataTypes.INTEGER
@@ -17,5 +17,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  return orders;
+  return Order;
 };

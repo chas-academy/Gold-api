@@ -20,15 +20,25 @@ module.exports = (sequelize, DataTypes) => {
     },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
-  }, {
-    classMethods: {
-      associate: function(models) {
-          Service.belongsTo(models.Customer, {
-            foreignKey: "client_id",
-            target: "user_id"
-          });
-      }
-    }
-  });
+  }, {});
+    Service.associate = function(models) {
+      Service.belongsTo(models.customer, {
+        foreignKey: "client_id",
+        target: "user_id"
+      });
+
+      Service.hasMany(models.order, {
+        foreignKey: "service_id"
+      });
+
+      Service.hasMany(models.complaint, {
+        foreignKey: "service_id"
+      });
+
+      Service.belongsToMany(models.user, {
+        as: "employees",
+        through: "employee_servies"
+      });
+    };
   return Service;
 };

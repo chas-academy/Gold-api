@@ -5,10 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     service_id: DataTypes.INTEGER
   }, {});
   EmployeeService.associate = function (models) {
-    EmployeeService.belongsTo(models.User, {
+    EmployeeService.belongsTo(models.user, {
       foreignKey: 'employee_id'
     });
-    EmployeeService.belongsTo(models.Service, {
+    EmployeeService.belongsTo(models.service, {
       foreignKey: 'service_id'
     });
   };

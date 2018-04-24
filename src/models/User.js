@@ -18,6 +18,14 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING
   });
   User.associate = function (models) {
+    User.hasOne(models.customer, {
+      foreignKey: "user_id"
+    });
+
+    User.belongsToMany(models.service, {
+      as: "services",
+      through: "employee_services"
+    });
   };
   return User;
 };

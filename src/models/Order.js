@@ -8,14 +8,15 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.TEXT,
     description: DataTypes.TEXT,
     image_path: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        Order.belongsTo(models.Service, {
-          foreignKey: "service_id"
-        });
-      }
-    }
-  });
+  }, {});
+  Order.associate = function(models) {
+    Order.belongsTo(models.service, {
+      foreignKey: "service_id"
+    });
+
+    Order.hasMany(models.complaint, {
+      foreignKey: "order_id"
+    });
+  };
   return Order;
 };

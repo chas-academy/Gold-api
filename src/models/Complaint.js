@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   var Complaint = sequelize.define('complaint', {
     service_id: {
       primaryKey: true,
+      autoIncrement: false,
       type: DataTypes.INTEGER
     },
     order_id: DataTypes.INTEGER,
@@ -11,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: function(models) {
-        Complaint.belongsTo(models.Service, {
+        Complaint.belongsTo(models.service, {
           foreignKey: "service_id"
         });
         
-        Complaint.belongsTo(models.Order, {
+        Complaint.belongsTo(models.order, {
           foreignKey: "order_id",
           target: "service_id"
         });

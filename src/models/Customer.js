@@ -1,7 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Customer = sequelize.define('customer', {
-    user_id: DataTypes.INTEGER,
+    user_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: false,
+    },
     type: {
       type: DataTypes.ENUM,
       values: [
@@ -14,8 +18,12 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.TEXT
   }, {});
   Customer.associate = function (models) {
-    Customer.belongsTo(models.User, {
+    Customer.belongsTo(models.user, {
       foreignKey: 'user_id'
+    });
+    
+    Customer.hasMany(models.service, {
+      foreignKey: 'client_id'
     });
   };
   return Customer;

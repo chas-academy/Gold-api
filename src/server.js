@@ -17,9 +17,22 @@ const models = require('./models')
 //     console.log(error)
 // })
 
-models.default.User.findOne().then(function (User) {
-    console.log(User)
-})
+// models.user.findAll({ include: [models.customer] }).then(function (User) {
+//     User.forEach((User, index) => {
+//         console.log("User ID: " + User.id)
+//         console.log("User Type: " + User.type)
+//         console.log("User Name: " + User.name)
+//         console.log("User Pers/Org number: " + User.pers_org_num)
+//         if (User.customer) {
+//             console.log("Customer ID: " + User.customer.user_id)
+//             console.log("Customer Type: " + User.customer.type)
+//             console.log("Customer Email: " + User.customer.email)
+//             console.log("Customer Tel: " + User.customer.tel)
+//             console.log("Customer Address: " + User.customer.address)
+//         }
+//         console.log("")
+//     })
+// })
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

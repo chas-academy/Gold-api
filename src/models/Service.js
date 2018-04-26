@@ -2,42 +2,68 @@
 module.exports = (sequelize, DataTypes) => {
   var Service = sequelize.define('service', {
     id: {
+      allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    client_id: DataTypes.INTEGER,
+    client_id: {
+      allowNull: true,
+      type: DataTypes.INTEGER
+    },
     order_type: {
+      allowNull: false,
       values: ["order","int_order","complaint"],
       type: DataTypes.ENUM
     },
-    con_pers: DataTypes.STRING,
-    con_tel: DataTypes.STRING,
-    datetime: DataTypes.DATE,
-    status: {
-      values: ["new","taken","done"],
-      type: DataTypes.ENUM
+    con_pers: {
+      allowNull: true,
+      type: DataTypes.STRING
     },
-    created_at: DataTypes.DATE,
-    updated_at: DataTypes.DATE
-  }, {});
+    con_tel: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
+    datetime: {
+      allowNull: true,
+      type: DataTypes.DATE
+    },
+    status: {
+      allowNull: false,
+      type: DataTypes.ENUM,
+      values: ["new","taken","done"],
+      defaultValue: "new"
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at'
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at'
+    }
+  }, {
+    timestamps: true
+  });
     Service.associate = function(models) {
       Service.belongsTo(models.customer, {
         foreignKey: "client_id",
         target: "user_id"
       });
 
-      Service.hasMany(models.order, {
+      Service.hasOne(models.order, {
         foreignKey: "service_id"
       });
 
       Service.hasMany(models.complaint, {
+        as: 'complaints',
         foreignKey: "service_id"
       });
 
       Service.belongsToMany(models.user, {
         as: "employees",
-        through: "employee_servies"
+        through: "employee_services",
+        timestamps: false
       });
     };
   return Service;

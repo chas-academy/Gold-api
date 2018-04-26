@@ -2,27 +2,41 @@
 module.exports = (sequelize, DataTypes) => {
   var Customer = sequelize.define('customer', {
     user_id: {
-      type: DataTypes.INTEGER,
+      allowNull: false,
       primaryKey: true,
       autoIncrement: false,
+      type: DataTypes.INTEGER
     },
     type: {
+      allowNull: false,
       type: DataTypes.ENUM,
       values: [
         "private",
         "company"
       ]
     },
-    email: DataTypes.STRING,
-    tel: DataTypes.STRING,
-    address: DataTypes.TEXT
-  }, {});
+    email: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    tel: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    address: {
+      allowNull: false,
+      type: DataTypes.TEXT
+    }
+  }, {
+    timestamps: false
+  });
   Customer.associate = function (models) {
     Customer.belongsTo(models.user, {
       foreignKey: 'user_id'
     });
     
     Customer.hasMany(models.service, {
+      as: 'services',
       foreignKey: 'client_id'
     });
   };

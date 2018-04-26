@@ -1,16 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var EmployeeService = sequelize.define('employee_service', {
-    employee_id: DataTypes.INTEGER,
-    service_id: DataTypes.INTEGER
+    userId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    serviceId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    }
   }, {});
-  EmployeeService.associate = function (models) {
-    EmployeeService.belongsTo(models.user, {
-      foreignKey: 'employee_id'
-    });
-    EmployeeService.belongsTo(models.service, {
-      foreignKey: 'service_id'
-    });
-  };
+  EmployeeService.associate = function (models) {};
   return EmployeeService;
 };

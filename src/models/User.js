@@ -2,10 +2,13 @@
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('user', {
     id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER
     },
     type: {
+      allowNull: false,
       type: DataTypes.ENUM,
       values: [
         "admin",
@@ -13,9 +16,20 @@ module.exports = (sequelize, DataTypes) => {
         "customer"
       ]
     },
-    name: DataTypes.STRING,
-    pers_org_num: DataTypes.STRING,
-    password: DataTypes.STRING
+    name: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    pers_org_num: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    password: {
+      allowNull: false,
+      type: DataTypes.STRING
+    }
+  }, {
+    timestamps: false
   });
   User.associate = function (models) {
     User.hasOne(models.customer, {
@@ -24,7 +38,8 @@ module.exports = (sequelize, DataTypes) => {
 
     User.belongsToMany(models.service, {
       as: "services",
-      through: "employee_services"
+      through: "employee_services",
+      timestamps: false
     });
   };
   return User;

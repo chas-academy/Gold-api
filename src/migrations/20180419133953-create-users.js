@@ -9,15 +9,19 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       type: {
+        allowNull: false,
         type: Sequelize.ENUM("admin", "employee", "customer")
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       pers_org_num: {
+        allowNull: false,
         type: Sequelize.STRING(20)
       },
       password: {
+        allowNull: false,
         type: Sequelize.STRING
       }
     });

@@ -2,14 +2,16 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('employee_services', {
-      employee_id: {
+      userId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "users",
           key: "id"
         }
       },
-      service_id: {
+      serviceId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "services",

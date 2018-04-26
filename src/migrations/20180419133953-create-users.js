@@ -18,7 +18,8 @@ module.exports = {
       },
       pers_org_num: {
         allowNull: false,
-        type: Sequelize.STRING(20)
+        type: Sequelize.STRING(20),
+        unique: true
       },
       password: {
         allowNull: false,

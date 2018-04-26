@@ -17,11 +17,13 @@ module.exports = {
       },
       email: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       tel: {
         allowNull: false,
-        type: Sequelize.STRING(20)
+        type: Sequelize.STRING(20),
+        unique: true
       },
       address: {
         allowNull: false,

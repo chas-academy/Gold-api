@@ -5,7 +5,7 @@ const app = express()
 const port = process.env.PORT || 7770
 
 const models = require('./models')
-
+models.sequelize.sync({logging:false}) // sync to help unique validations
 
 
 // ----------- Create a customer user
@@ -25,7 +25,12 @@ const models = require('./models')
 // })
 
 // User.save().catch(error => {
-//     console.log(error)
+//     User.destroy({
+//         where: {
+//             id: User.id
+//         }
+//     })
+//     console.log(error.message)
 // })
 
 

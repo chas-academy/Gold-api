@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     con_pers: {
       allowNull: true,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        isAlpha: true
+      }
     },
     con_tel: {
       allowNull: true,

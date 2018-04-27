@@ -18,7 +18,7 @@ module.exports = {
       },
       order_type: {
         allowNull: false,
-        type: Sequelize.ENUM("order","int_order","complaint")
+        type: Sequelize.ENUM("order", "int_order", "complaint")
       },
       con_pers: {
         allowNull: true,
@@ -34,7 +34,7 @@ module.exports = {
       },
       status: {
         allowNull: false,
-        type: Sequelize.ENUM("new","taken","done"),
+        type: Sequelize.ENUM("new", "taken", "done"),
         defaultValue: "new"
       },
       created_at: {

@@ -63,6 +63,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "service_id"
       });
 
+      Service.hasMany(models.internal_order, {
+        as: 'int_orders',
+        foreignKey: "service_id"
+      });
+
       Service.belongsToMany(models.user, {
         as: "employees",
         through: "employee_services",

@@ -132,6 +132,30 @@ models.sequelize.sync({logging:false}) // sync to help unique validations
 //     })
 // })
 
+
+
+// ----------- See all services and their descriptions
+// models.service.findAll({ include: [{model: models.internal_order, as: "int_orders" }, {model: models.order}, {model: models.complaint, as: "complaints"}] }).then(function (services) {
+//     services.forEach(service => {
+//         if(service.order) {
+//             console.log("Order ID: " + service.order.service_id)
+//             console.log("Description: " + service.order.description)
+//         }
+//         if(service.int_orders) {
+//             service.int_orders.forEach(int_order => {
+//                 console.log("IntOrder ID: " + int_order.service_id)
+//                 console.log("Description: " + int_order.description)
+//             });
+//         }
+//         if(service.complaints) {
+//             service.complaints.forEach(complaint => {
+//                 console.log("Complaint ID: " + complaint.service_id)
+//                 console.log("Description: " + complaint.description)
+//             });
+//         }
+//     });
+// })
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 

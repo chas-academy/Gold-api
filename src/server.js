@@ -1,11 +1,15 @@
+import routes from './routes';
+
 var express = require('express')
 var bodyParser = require('body-parser')
 
 const app = express()
 const port = process.env.PORT || 7770
 
+var services = require('./controllers/Services.js')
+
 const models = require('./models')
-models.sequelize.sync({logging:false}) // sync to help unique validations
+models.sequelize.sync({ logging: false }) // sync to help unique validations
 
 
 // ----------- Create a customer user
@@ -70,13 +74,13 @@ models.sequelize.sync({logging:false}) // sync to help unique validations
 //             datetime: "2020-03-08 15:00:00.000+2",
 //             complaints: {
 //                 order_id: service.id,
-                // description: "Complaint desc",
+// description: "Complaint desc",
 //                 image_path: "images"
 //             }
 //         }, {
 //             include: [{model: models.complaint, as: "complaints"}]
 //         })
-        
+
 //         Service.save().catch(error => {
 //             console.log(error)
 //         })
@@ -159,10 +163,15 @@ models.sequelize.sync({logging:false}) // sync to help unique validations
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+
 app.get('/', function (req, res, next) {
     res.send('GOLD Server Running on http://localhost:' + port + ' or for windows users 192.168.99.100:' + port)
 })
 
+app.get('/services', services.index)
+
 app.listen(port, () => {
     console.log('[api][listen] http://localhost:' + port);
 })
+
+routes(app)

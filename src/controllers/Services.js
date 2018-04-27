@@ -1,25 +1,12 @@
-// import * as Sessions from '../lib/Sessions'
+var models = require('../models');
+var Service = require('../models').service;
 
-// export default {
-//   authenticate(req, res) {
-//     Sessions
-//       .auth(req, res)
-//       .then(auth => {
-//         res.status(auth.status).send(auth.data)
-//       })
-//       .catch(error => {
-//         res.status(400).send(error)
-//       })
-//   },
+module.exports = {
 
-//   signOut(req, res) {
-//     Sessions.signOut(req)
-//       .then(() => {
-//         res.status(200).send()
-//       })
-//   },
-
-//   verifyToken(req, res) {
-//     res.status(200).send()
-//   }
-// }
+    index(req, res) {
+        Service.findAll({ include: [{ model: models.internal_order, as: "int_orders" },
+         { model: models.order }, { model: models.complaint, as: "complaints" }] }).then(function (services) {
+            res.send(services);
+        })
+    }
+}

@@ -12,5 +12,4 @@ export default {
     Orders,
     Services,
     Users
-
 }

@@ -6,9 +6,8 @@ var bodyParser = require('body-parser')
 const app = express()
 const port = process.env.PORT || 7770
 
-var services = require('./controllers/Services.js')
-
 const models = require('./models')
+
 models.sequelize.sync({ logging: false }) // sync to help unique validations
 
 
@@ -167,8 +166,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', function (req, res, next) {
     res.send('GOLD Server Running on http://localhost:' + port + ' or for windows users 192.168.99.100:' + port)
 })
-
-app.get('/services', services.index)
 
 app.listen(port, () => {
     console.log('[api][listen] http://localhost:' + port);

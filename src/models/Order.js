@@ -20,15 +20,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   }, {
-    timestamps: false
-  });
-  Order.associate = function(models) {
+      timestamps: false
+    });
+  Order.associate = function (models) {
     Order.belongsTo(models.service, {
-      foreignKey: "service_id"
+      foreignKey: "service_id",
+      onDelete: 'CASCADE'
     });
 
     Order.hasMany(models.complaint, {
-      foreignKey: "order_id"
+      foreignKey: "order_id",
+      onDelete: 'CASCADE'
     });
   };
   return Order;

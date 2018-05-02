@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     order_type: {
       allowNull: false,
-      values: ["order","int_order","complaint"],
+      values: ["order", "int_order", "complaint"],
       type: DataTypes.ENUM
     },
     con_pers: {
@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     status: {
       allowNull: false,
       type: DataTypes.ENUM,
-      values: ["new","taken","done"],
+      values: ["new", "taken", "done"],
       defaultValue: "new"
     },
     createdAt: {
@@ -46,33 +46,36 @@ module.exports = (sequelize, DataTypes) => {
       field: 'updated_at'
     }
   }, {
-    timestamps: true
-  });
-    Service.associate = function(models) {
-      Service.belongsTo(models.customer, {
-        foreignKey: "client_id",
-        target: "user_id"
-      });
+      timestamps: true
+    });
+  Service.associate = function (models) {
+    Service.belongsTo(models.customer, {
+      foreignKey: "client_id",
+      target: "user_id"
+    });
 
-      Service.hasOne(models.order, {
-        foreignKey: "service_id"
-      });
+    Service.hasOne(models.order, {
+      foreignKey: "service_id",
+      onDelete: 'CASCADE'
+    });
 
-      Service.hasMany(models.complaint, {
-        as: 'complaints',
-        foreignKey: "service_id"
-      });
+    Service.hasMany(models.complaint, {
+      as: 'complaints',
+      foreignKey: "service_id",
+      onDelete: 'CASCADE'
+    });
 
-      Service.hasMany(models.internal_order, {
-        as: 'int_orders',
-        foreignKey: "service_id"
-      });
+    Service.hasMany(models.internal_order, {
+      as: 'int_orders',
+      foreignKey: "service_id",
+      onDelete: 'CASCADE'
+    });
 
-      Service.belongsToMany(models.user, {
-        as: "employees",
-        through: "employee_services",
-        timestamps: false
-      });
-    };
+    Service.belongsToMany(models.user, {
+      as: "employees",
+      through: "employee_services",
+      timestamps: false
+    });
+  };
   return Service;
 };

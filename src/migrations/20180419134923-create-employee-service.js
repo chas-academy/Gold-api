@@ -13,6 +13,7 @@ module.exports = {
       serviceId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: "services",
           key: "id"

@@ -24,7 +24,9 @@ module.exports = (sequelize, DataTypes) => {
   });
     Complaint.associate = function(models) {
       Complaint.belongsTo(models.service, {
-        foreignKey: "service_id"
+        foreignKey: "service_id",
+        onDelete: 'cascade',
+        hooks: true
       });
       
       Complaint.belongsTo(models.order, {

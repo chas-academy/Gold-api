@@ -55,17 +55,23 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       Service.hasOne(models.order, {
-        foreignKey: "service_id"
+        foreignKey: "service_id",
+        onDelete: 'cascade',
+        hooks: true
       });
 
       Service.hasMany(models.complaint, {
         as: 'complaints',
-        foreignKey: "service_id"
+        foreignKey: "service_id",
+        onDelete: 'cascade',
+        hooks: true
       });
 
       Service.hasMany(models.internal_order, {
         as: 'int_orders',
-        foreignKey: "service_id"
+        foreignKey: "service_id",
+        onDelete: 'cascade',
+        hooks: true
       });
 
       Service.belongsToMany(models.user, {

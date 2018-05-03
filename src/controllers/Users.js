@@ -30,17 +30,19 @@ module.exports = {
     createAdmin(req, res) {
 		User.sync({force: false, logging: false})
 		.then(function () {
-			User.create({
-				type: "admin",
-				name: req.body.name,
-				pers_org_num: req.body.pers_org_num,
-				password: req.body.password
-			})
-			.then(function (user) {
-				res.status(200).json(user.get({ plain: true }))
-			})
-			.catch(function (error) {
-				res.status(500).json(error)
+			bcrypt.hash(req.body.password, 10, function(error, hash) {
+				User.create({
+					type: "admin",
+					name: req.body.name,
+					pers_org_num: req.body.pers_org_num,
+					password: hash
+				})
+				.then(function (user) {
+					res.status(200).json(user.get({ plain: true }))
+				})
+				.catch(function (error) {
+					res.status(500).json(error)
+				})
 			})
 		})
 		.catch(function (error) {
@@ -52,17 +54,19 @@ module.exports = {
     createEmployee(req, res) {
 		User.sync({force: false, logging: false})
 		.then(function () {
-			User.create({
-				type: "employee",
-				name: req.body.name,
-				pers_org_num: req.body.pers_org_num,
-				password: req.body.password
-			})
-			.then(function (user) {
-				res.status(200).json(user.get({ plain: true }))
-			})
-			.catch(function (error) {
-				res.status(500).json(error)
+			bcrypt.hash(req.body.password, 10, function(error, hash) {
+				User.create({
+					type: "employee",
+					name: req.body.name,
+					pers_org_num: req.body.pers_org_num,
+					password: hash
+				})
+				.then(function (user) {
+					res.status(200).json(user.get({ plain: true }))
+				})
+				.catch(function (error) {
+					res.status(500).json(error)
+				})
 			})
 		})
 		.catch(function (error) {
@@ -74,25 +78,27 @@ module.exports = {
     createCustomer(req, res) {
 		User.sync({force: false, logging: false})
 		.then(function () {
-			User.create({
-				type: "customer",
-				name: req.body.name,
-				pers_org_num: req.body.pers_org_num,
-				password: req.body.password,
-				customer: {
-					type: req.body.type,
-					email: req.body.email,
-					tel: req.body.tel,
-					address: req.body.address
-				}
-			}, {
-				include: [models.customer]
-			})
-			.then(function (user) {
-				res.status(200).json(user.get({ plain: true }))
-			})
-			.catch(function (error) {
-				res.status(500).json(error)
+			bcrypt.hash(req.body.password, 10, function(error, hash) {
+				User.create({
+					type: "customer",
+					name: req.body.name,
+					pers_org_num: req.body.pers_org_num,
+					password: hash,
+					customer: {
+						type: req.body.type,
+						email: req.body.email,
+						tel: req.body.tel,
+						address: req.body.address
+					}
+				}, {
+					include: [models.customer]
+				})
+				.then(function (user) {
+					res.status(200).json(user.get({ plain: true }))
+				})
+				.catch(function (error) {
+					res.status(500).json(error)
+				})
 			})
 		})
 		.catch(function (error) {
@@ -137,12 +143,13 @@ module.exports = {
 
 	// Update an user customer
 	updateCustomer(req, res) {
-		User.findById(req.params.id)
+		User.findById(req.params.id, { include: [models.customer] })
 		.then(function (User) {
 			User.update({
 				name: req.body.name,
 				pers_org_num: req.body.pers_org_num,
 				customer: {
+					type: req.body.type,
 					email: req.body.email,
 					tel: req.body.tel,
 					address: req.body.address

@@ -47,6 +47,8 @@ module.exports = {
                 image_path: req.body.image_path
             }
 
+        }, {
+            include: [models.order]
         })
             .then(function (orders) {
                 res.status(200).json(orders);
@@ -61,7 +63,7 @@ module.exports = {
         if (hours < 10 && hours.length < 2) {
             req.body.time = "0" + req.body.time
         }
-        Service.findById(req.params.id).then(function (Service) {
+        Service.findById(req.params.id, { include: [models.order] }).then(function (Service) {
             Service.update({
                 client_id: req.body.userId,
                 order_type: "order",
@@ -74,6 +76,8 @@ module.exports = {
                     image_path: req.body.image_path
                 }
 
+            }, {
+                include: [models.order]
             })
         })
             .then(function (orders) {

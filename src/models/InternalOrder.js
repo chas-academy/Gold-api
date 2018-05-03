@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   IntOrder.associate = function (models) {
     IntOrder.belongsTo(models.service, {
       foreignKey: "service_id",
-      onDelete: 'cascade',
+      onDelete: 'CASCADE',
       hooks: true
     });
   };

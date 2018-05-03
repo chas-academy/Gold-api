@@ -54,21 +54,25 @@ module.exports = (sequelize, DataTypes) => {
       target: "user_id"
     });
 
+
     Service.hasOne(models.order, {
       foreignKey: "service_id",
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      hooks: true
     });
 
     Service.hasMany(models.complaint, {
       as: 'complaints',
       foreignKey: "service_id",
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      hooks: true
     });
 
     Service.hasMany(models.internal_order, {
       as: 'int_orders',
       foreignKey: "service_id",
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      hooks: true
     });
 
     Service.belongsToMany(models.user, {

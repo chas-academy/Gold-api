@@ -37,12 +37,16 @@ module.exports = (sequelize, DataTypes) => {
   });
   Customer.associate = function (models) {
     Customer.belongsTo(models.user, {
-      foreignKey: 'user_id'
+      foreignKey: 'user_id',
+      onDelete: 'cascade',
+      hooks: true
     });
     
     Customer.hasMany(models.service, {
       as: 'services',
-      foreignKey: 'client_id'
+      foreignKey: 'client_id',
+      onDelete: 'cascade',
+      hooks: true
     });
   };
   return Customer;

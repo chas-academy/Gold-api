@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     });
   IntOrder.associate = function (models) {
     IntOrder.belongsTo(models.service, {
-      foreignKey: "service_id"
+      foreignKey: "service_id",
+      onDelete: 'cascade',
+      hooks: true
     });
   };
   return IntOrder;

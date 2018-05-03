@@ -6,49 +6,49 @@ module.exports = {
         type: 'admin',
         name: 'Admin',
         pers_org_num: '199901019876',
-        password: 'qwerty'
+        password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         id: 2,
         type: 'employee',
         name: 'Erica',
         pers_org_num: '199901019877',
-        password: 'qwerty'
+        password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         id: 3,
         type: 'employee',
         name: 'Sven',
         pers_org_num: '199901019878',
-        password: 'qwerty'
+        password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         id: 4,
         type: 'employee',
         name: 'Abdi',
         pers_org_num: '199901019879',
-        password: 'qwerty'
+        password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         id: 5,
         type: 'customer',
         name: 'Sven Svensson',
         pers_org_num: '199901019870',
-        password: 'qwerty'
+        password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         id: 6,
         type: 'customer',
         name: 'Bob Johnson',
         pers_org_num: '199901019875',
-        password: 'qwerty'
+        password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         id: 7,
         type: 'customer',
         name: 'Mäklarringen',
         pers_org_num: '199901019874',
-        password: 'qwerty'
+        password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         id: 8,
         type: 'customer',
         name: 'Hidden Company',
         pers_org_num: '199901019873',
-        password: 'qwerty'
+        password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }], {});
   },
 

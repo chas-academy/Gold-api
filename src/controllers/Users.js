@@ -17,7 +17,7 @@ module.exports = {
 
 	// Find one user by ID
     find(req, res) {
-		User.findById(req.params.id, { include: [{ model: models.customer }] })
+		User.findById(req.params.id, { include: [{ model: models.customer }, { model: models.service, as: "services" }] })
 		.then(function (user) {
             res.status(200).json(user)
 		})
@@ -102,7 +102,6 @@ module.exports = {
 	
 	// Update an user admin/epmloyee
 	update(req, res) {
-		// req.body & req.params.id
 		User.findById(req.params.id)
 		.then(function (User) {
 			User.update({
@@ -116,6 +115,20 @@ module.exports = {
 			.catch(function (error) {
 				res.status(500).json(error)
 			});
+
+			if (req.body.newPassword) {
+				bcrypt.hash(req.body.newPassword, 10, function(error, hash) {
+					User.update({
+						password: hash
+					})
+					.then(function (user) {
+						res.status(200).json(user.get({ plaint: true }))
+					})
+					.catch(function (error) {
+						res.status(500).json(error)
+					})
+				})
+			}
 		})
 		.catch(function (error) {
 			res.status(500).json(error)
@@ -143,33 +156,20 @@ module.exports = {
 			.catch(function (error) {
 				res.status(500).json(error)
 			})
-		})
-		.catch(function (error) {
-			res.status(500).json(error)
-		})
-	},
 
-	// Update users password
-	updatePass(req, res) {
-		User.findById(req.params.id)
-		.then(function (User) {
-			bcrypt.compare(req.body.password, User.password, function(error, match) {
-				if(match) {
-					bcrypt.hash(req.body.newPassword, 10, function(error, hash) {
-						User.update({
-							password: hash
-						})
-						.then(function (user) {
-							res.status(200).json(user.get({ plaint: true }))
-						})
-						.catch(function (error) {
-							res.status(500).json(error)
-						})
+			if (req.body.newPassword) {
+				bcrypt.hash(req.body.newPassword, 10, function(error, hash) {
+					User.update({
+						password: hash
 					})
-				} else {
-					res.status(500).json("Password didn't match")
-				} 
-			});
+					.then(function (user) {
+						res.status(200).json(user.get({ plaint: true }))
+					})
+					.catch(function (error) {
+						res.status(500).json(error)
+					})
+				})
+			}
 		})
 		.catch(function (error) {
 			res.status(500).json(error)

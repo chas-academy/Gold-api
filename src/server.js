@@ -1,5 +1,7 @@
 var express = require('express')
 var bodyParser = require('body-parser')
+var cors = require('cors')
+
 
 const app = express()
 const port = process.env.PORT || 7770
@@ -9,6 +11,8 @@ const jsonwebtoken = require('jsonwebtoken');
 
 models.sequelize.sync({ logging: false }) // sync to help unique validations
 
+app.use(cors())
+app.options('*', cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 

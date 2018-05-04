@@ -5,6 +5,8 @@ ADD package.json /package.json
 
 ENV NODE_PATH=/node_modules
 ENV PATH=$PATH:/node_modules/.bin
+ENV CHOKIDAR_USEPOLLING=true
+# ENV COMPOSE_CONVERT_WINDOWS_PATHS=1
 
 RUN yarn
 

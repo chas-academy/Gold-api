@@ -1,60 +1,200 @@
-import * as Users from '../lib/Users'
+var models = require('../models');
+var User = require('../models').user;
+const bcrypt = require('bcryptjs');
 
-export default {
-  list(req, res) {
-    Promise
-      .all([
-        Users.list({
-          res,
-          query: req.query,
-          returnData: true,
-          jsonData: true
-        }),
-        Users.pages({ query: req.query })
-      ])
-      .then(promises => {
-        res.status(200).send({
-          rows: promises[0],
-          pages: promises[1]
+module.exports = {
+
+	// Get all users
+    all(req, res) {
+		User.findAll({ include: [{ model: models.customer }, { model: models.service, as: "services" }] })
+		.then(function (users) {
+            res.status(200).json(users)
+		})
+		.catch(function (error) {
+            res.status(500).json(error)
         })
-      })
-      .catch(error => {
-        res.status(400).send(error)
-      })
-  },
+    },
 
-  create(req, res) {
-    // TODO: Create promises for paths creation and
-    // sending temporary password to the new user
-    // after the user record has beend created
+	// Find one user by ID
+    find(req, res) {
+		User.findById(req.params.id, { include: [{ model: models.customer }, { model: models.service, as: "services" }] })
+		.then(function (user) {
+            res.status(200).json(user)
+		})
+		.catch(function (error) {
+            res.status(500).json(error)
+        })
+	},
 
-    Users.create({
-      res,
-      body: req.body
-    })
-  },
+	// Create an user admin
+    createAdmin(req, res) {
+		User.sync({force: false, logging: false})
+		.then(function () {
+			bcrypt.hash(req.body.password, 10, function(error, hash) {
+				User.create({
+					type: "admin",
+					name: req.body.name,
+					pers_org_num: req.body.pers_org_num,
+					password: hash
+				})
+				.then(function (user) {
+					res.status(200).json(user.get({ plain: true }))
+				})
+				.catch(function (error) {
+					res.status(500).json(error)
+				})
+			})
+		})
+		.catch(function (error) {
+			res.status(500).json(error)
+		})
+	},
 
-  find(req, res) {
-    Users.find({
-      res,
-      where: {
-        userId: req.params.userId
-      }
-    })
-  },
+	// Create an user employee
+    createEmployee(req, res) {
+		User.sync({force: false, logging: false})
+		.then(function () {
+			bcrypt.hash(req.body.password, 10, function(error, hash) {
+				User.create({
+					type: "employee",
+					name: req.body.name,
+					pers_org_num: req.body.pers_org_num,
+					password: hash
+				})
+				.then(function (user) {
+					res.status(200).json(user.get({ plain: true }))
+				})
+				.catch(function (error) {
+					res.status(500).json(error)
+				})
+			})
+		})
+		.catch(function (error) {
+			res.status(500).json(error)
+		})
+	},
 
-  update(req, res) {
-    Users.update({
-      res,
-      body: req.body,
-      userId: req.params.userId
-    })
-  },
+	// Create an user customer
+    createCustomer(req, res) {
+		User.sync({force: false, logging: false})
+		.then(function () {
+			bcrypt.hash(req.body.password, 10, function(error, hash) {
+				User.create({
+					type: "customer",
+					name: req.body.name,
+					pers_org_num: req.body.pers_org_num,
+					password: hash,
+					customer: {
+						type: req.body.type,
+						email: req.body.email,
+						tel: req.body.tel,
+						address: req.body.address,
+						lat: req.body.lat,
+						lon: req.body.lon
+					}
+				}, {
+					include: [models.customer]
+				})
+				.then(function (user) {
+					res.status(200).json(user.get({ plain: true }))
+				})
+				.catch(function (error) {
+					res.status(500).json(error)
+				})
+			})
+		})
+		.catch(function (error) {
+			res.status(500).json(error)
+		})
+	},
+	
+	// Update an user admin/epmloyee
+	update(req, res) {
+		User.findById(req.params.id)
+		.then(function (User) {
+			User.update({
+				type: req.body.user_type,
+				name: req.body.name,
+				pers_org_num: req.body.pers_org_num,
+			})
+			.then(function (user) {
+				res.status(200).json(user.get({ plain: true }))
+			})
+			.catch(function (error) {
+				res.status(500).json(error)
+			});
 
-  destroy(req, res) {
-    Users.destroy({
-      res,
-      userId: req.params.userId
-    })
-  }
+			if (req.body.newPassword) {
+				bcrypt.hash(req.body.newPassword, 10, function(error, hash) {
+					User.update({
+						password: hash
+					})
+					.then(function (user) {
+						res.status(200).json(user.get({ plaint: true }))
+					})
+					.catch(function (error) {
+						res.status(500).json(error)
+					})
+				})
+			}
+		})
+		.catch(function (error) {
+			res.status(500).json(error)
+		})
+	},
+
+	// Update an user customer
+	updateCustomer(req, res) {
+		User.findById(req.params.id, { include: [models.customer] })
+		.then(function (User) {
+			User.update({
+				name: req.body.name,
+				pers_org_num: req.body.pers_org_num,
+				customer: {
+					type: req.body.type,
+					email: req.body.email,
+					tel: req.body.tel,
+					address: req.body.address,
+					lat: req.body.lat,
+					lon: req.body.lon
+				}
+			}, {
+				include: [models.customer]
+			})
+			.then(function (user) {
+				res.status(200).json(user.get({ plain: true }))
+			})
+			.catch(function (error) {
+				res.status(500).json(error)
+			})
+
+			if (req.body.newPassword) {
+				bcrypt.hash(req.body.newPassword, 10, function(error, hash) {
+					User.update({
+						password: hash
+					})
+					.then(function (user) {
+						res.status(200).json(user.get({ plaint: true }))
+					})
+					.catch(function (error) {
+						res.status(500).json(error)
+					})
+				})
+			}
+		})
+		.catch(function (error) {
+			res.status(500).json(error)
+		})
+	},
+
+	// Delete an user
+	destroy(req, res) {
+		User.destroy({ where: { id: req.params.id } })
+		.then(function (user) {
+			res.status(200).json(user.get({ plain: true }))
+		})
+		.catch(function (error) {
+			res.status(500).json(error)
+		})
+	}
 }

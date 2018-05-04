@@ -1,41 +1,49 @@
-"use strict";
-
-import bcrypt from "bcryptjs";
-
-export default (sequelize, DataTypes) => {
-    const User = sequelize.define("User", {
-        userId: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        firstName: DataTypes.STRING,
-        lastName: DataTypes.STRING,
-        email: {
-            type: DataTypes.STRING,
-            unique: true
-        },
-        role: DataTypes.STRING,
-        password: DataTypes.STRING,
-        redirect: DataTypes.STRING,
-        status: DataTypes.STRING
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  var User = sequelize.define('user', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER
+    },
+    type: {
+      allowNull: false,
+      type: DataTypes.ENUM,
+      values: [
+        "admin",
+        "employee",
+        "customer"
+      ]
+    },
+    name: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    pers_org_num: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      unique: true
+    },
+    password: {
+      allowNull: false,
+      type: DataTypes.STRING
+    }
+  }, {
+    timestamps: false
+  });
+  User.associate = function (models) {
+    User.hasOne(models.customer, {
+      foreignKey: "user_id",
+      onDelete: 'cascade',
+      hooks: true
     });
 
-    User.prototype.authenticate = function(password) {
-        return bcrypt.compareSync(password, this.password);
-    };
-
-    User.associate = models => {
-        User.hasOne(models.Path, {
-            as: "Paths",
-            foreignKey: "userId"
-        });
-
-        User.hasMany(models.Session, {
-            as: "Sessions",
-            foreignKey: "userId"
-        });
-    };
-
-    return User;
+    User.belongsToMany(models.service, {
+      as: "services",
+      through: "employee_services",
+      timestamps: false
+    });
+  };
+  return User;
 };

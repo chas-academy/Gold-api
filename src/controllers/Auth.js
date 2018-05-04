@@ -19,7 +19,9 @@ module.exports = {
                         type: req.body.type,
                         email: req.body.email,
                         tel: req.body.tel,
-                        address: req.body.address
+                        address: req.body.address,
+                        lat: req.body.lat,
+                        lon: req.body.lon
                     }
                 }, {
                     include: [models.customer]
@@ -43,26 +45,40 @@ module.exports = {
         .then(function (User) {
 			bcrypt.compare(req.body.password, User.password, function(error, match) {
                 if (match) {
-                    res.status(200).json({
-                        token: jwt.sign({
-                            id: User.id,
-                            name: User.name,
-                            pers_org_num: User.pers_org_num,
-                            customer_type: User.customer.type,
-                            email: User.customer.email,
-                            tel: User.customer.tel,
-                            address: User.customer.address
-                        }, 'mySecret', {
-                            expiresIn: 86400
+                    if (User.type == "customer") {
+                        res.status(200).json({
+                            token: jwt.sign({
+                                id: User.id,
+                                name: User.name,
+                                pers_org_num: User.pers_org_num,
+                                customer_type: User.customer.type,
+                                email: User.customer.email,
+                                tel: User.customer.tel,
+                                address: User.customer.address,
+                                lat: User.customer.lat,
+                                lon: User.customer.lon
+                            }, 'jwtsecretcode', {
+                                expiresIn: 86400
+                            })
                         })
-                    })
+                    }  else {
+                        res.status(200).json({
+                            token: jwt.sign({
+                                id: User.id,
+                                name: User.name,
+                                pers_org_num: User.pers_org_num
+                            }, 'jwtsecretcode', {
+                                expiresIn: 86400
+                            })
+                        })
+                    }
                 } else {
-                    res.status(500).json("Wrong password!")
+                    res.status(500).json({ error: error, msg: "Fel lösenord."})
                 }
             })
         })
         .catch(function (error) {
-            res.status(500).json("There is no such user.")
+            res.status(500).json({ error: error, msg: "Kan inte hitta användare med angiven pers-/orgnummer." })
         })
     },
 
@@ -71,7 +87,7 @@ module.exports = {
         if (req.user) {
             next()
         } else {
-            res.status(401).json("Unauthorized user!")
+            res.status(401).json({ error: error, msg: "Unauthorized user." })
         }
     }
 }

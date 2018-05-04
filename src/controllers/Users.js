@@ -88,7 +88,9 @@ module.exports = {
 						type: req.body.type,
 						email: req.body.email,
 						tel: req.body.tel,
-						address: req.body.address
+						address: req.body.address,
+						lat: req.body.lat,
+						lon: req.body.lon
 					}
 				}, {
 					include: [models.customer]
@@ -152,7 +154,9 @@ module.exports = {
 					type: req.body.type,
 					email: req.body.email,
 					tel: req.body.tel,
-					address: req.body.address
+					address: req.body.address,
+					lat: req.body.lat,
+					lon: req.body.lon
 				}
 			}, {
 				include: [models.customer]

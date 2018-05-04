@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(function (req, res, next) {
     if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-        jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'mySecret', function (error, decode) {
+        jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'jwtsecretcode', function (error, decode) {
             if (error) req.user = undefined
             req.user = decode
             next()

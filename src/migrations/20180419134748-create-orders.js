@@ -21,6 +21,7 @@ module.exports = {
         type: Sequelize.TEXT
       },
       image_path: {
+        allowNull: true,
         type: Sequelize.STRING(50)
       }
     });

@@ -8,7 +8,6 @@ const port = process.env.PORT || 7770
 
 const models = require('./models')
 const jsonwebtoken = require('jsonwebtoken');
-const cors = require('cors')
 
 models.sequelize.sync({ logging: false }) // sync to help unique validations
 

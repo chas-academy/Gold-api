@@ -1,5 +1,7 @@
 var express = require('express')
 var bodyParser = require('body-parser')
+var cors = require('cors')
+
 
 const app = express()
 const port = process.env.PORT || 7770
@@ -9,12 +11,14 @@ const jsonwebtoken = require('jsonwebtoken');
 
 models.sequelize.sync({ logging: false }) // sync to help unique validations
 
+app.use(cors())
+app.options('*', cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(function (req, res, next) {
     if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-        jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'mySecret', function (error, decode) {
+        jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'jwtsecretcode', function (error, decode) {
             if (error) req.user = undefined
             req.user = decode
             next()

@@ -18,10 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     con_pers: {
       allowNull: true,
-      type: DataTypes.STRING,
-      validate: {
-        isAlpha: true
-      }
+      type: DataTypes.STRING
     },
     con_tel: {
       allowNull: true,
@@ -34,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     status: {
       allowNull: false,
       type: DataTypes.ENUM,
-      values: ["new", "taken", "done"],
+      values: ["new", "assigned", "taken", "done"],
       defaultValue: "new"
     },
     createdAt: {

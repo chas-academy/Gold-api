@@ -35,7 +35,7 @@ module.exports = {
       },
       status: {
         allowNull: false,
-        type: Sequelize.ENUM("new", "taken", "done"),
+        type: Sequelize.ENUM("new", "assigned", "taken", "done"),
         defaultValue: "new"
       },
       created_at: {

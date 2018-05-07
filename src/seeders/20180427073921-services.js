@@ -3,7 +3,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
       return queryInterface.bulkInsert('services', [{
-        id: 1,
         client_id: 5,
         order_type: 'order',
         con_pers: 'Sven',
@@ -11,7 +10,6 @@ module.exports = {
         datetime: '2018-05-23 16:00:00.000 +02:00',
         status: 'new'
       }, {
-        id: 2,
         client_id: 5,
         order_type: 'complaint',
         con_pers: 'Sven',
@@ -19,7 +17,6 @@ module.exports = {
         datetime: '2018-05-24 12:00:00.000 +02:00',
         status: 'new'
       }, {
-        id: 3,
         client_id: 6,
         order_type: 'order',
         con_pers: 'Bob',
@@ -27,7 +24,6 @@ module.exports = {
         datetime: '2018-05-23 14:00:00.000 +02:00',
         status: 'new'
       }, {
-        id: 4,
         client_id: 6,
         order_type: 'complaint',
         con_pers: 'Bob',
@@ -35,7 +31,6 @@ module.exports = {
         datetime: '2018-05-24 14:00:00.000 +02:00',
         status: 'new'
       }, {
-        id: 5,
         client_id: 7,
         order_type: 'order',
         con_pers: 'Jakob',
@@ -43,7 +38,6 @@ module.exports = {
         datetime: '2018-05-24 16:30:00.000 +02:00',
         status: 'new'
       }, {
-        id: 6,
         client_id: 7,
         order_type: 'complaint',
         con_pers: 'Jakob',
@@ -51,7 +45,6 @@ module.exports = {
         datetime: '2018-05-24 19:00:00.000 +02:00',
         status: 'new'
       }, {
-        id: 7,
         client_id: 8,
         order_type: 'order',
         con_pers: 'Mindy',
@@ -59,7 +52,6 @@ module.exports = {
         datetime: '2018-05-25 10:00:00.000 +02:00',
         status: 'new'
       }, {
-        id: 8,
         client_id: 8,
         order_type: 'complaint',
         con_pers: 'Mindy',
@@ -67,7 +59,6 @@ module.exports = {
         datetime: '2018-05-25 16:00:00.000 +02:00',
         status: 'new'
       }, {
-        id: 9,
         client_id: null,
         order_type: 'int_order',
         con_pers: null,
@@ -75,7 +66,6 @@ module.exports = {
         datetime: null,
         status: 'new'
       }, {
-        id: 10,
         client_id: null,
         order_type: 'int_order',
         con_pers: null,

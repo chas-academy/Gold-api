@@ -46,31 +46,31 @@ module.exports = {
                 bcrypt.compare(req.body.password, User.password, function (error, match) {
                     if (match) {
                         if (User.type == "customer") {
-                            res.status(200).json({
-                                token: jwt.sign({
-                                    id: User.id,
-                                    name: User.name,
-                                    pers_org_num: User.pers_org_num,
-                                    customer_type: User.customer.type,
-                                    email: User.customer.email,
-                                    tel: User.customer.tel,
-                                    address: User.customer.address,
-                                    lat: User.customer.lat,
-                                    lon: User.customer.lon
+                            let token = "JWT " + jwt.sign({
+                                id: User.id,
+                                name: User.name,
+                                pers_org_num: User.pers_org_num,
+                                user_type: User.type,
+                                customer_type: User.customer.type,
+                                email: User.customer.email,
+                                tel: User.customer.tel,
+                                address: User.customer.address,
+                                lat: User.customer.lat,
+                                lon: User.customer.lon
                                 }, 'jwtsecretcode', {
-                                        expiresIn: 86400
-                                    })
-                            })
+                                    expiresIn: 86400
+                                })
+                            res.status(200).json({ token: token })
                         } else {
-                            res.status(200).json({
-                                token: jwt.sign({
-                                    id: User.id,
-                                    name: User.name,
-                                    pers_org_num: User.pers_org_num
+                            let token = "JWT " + jwt.sign({
+                                id: User.id,
+                                name: User.name,
+                                pers_org_num: User.pers_org_num,
+                                user_type: User.type,
                                 }, 'jwtsecretcode', {
-                                        expiresIn: 86400
-                                    })
-                            })
+                                    expiresIn: 86400
+                                })
+                            res.status(200).json({ token: token })
                         }
                     } else {
                         res.status(500).json({ error: error, msg: "Fel lösenord." })

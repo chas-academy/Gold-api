@@ -37,9 +37,9 @@ module.exports = {
         // }
         Service.create({
             order_type: "complaint",
-            order_id: req.body.order_id,
             // datetime: new Date(req.body.date + "T" + req.body.time),
             complaint: {
+                order_id: req.body.order_id,
                 description: req.body.description,
                 image_path: req.body.image_path
             }
@@ -87,5 +87,11 @@ module.exports = {
             },
 
         })
+            .then(function (complaint) {
+                res.status(200).json(complaint);
+            })
+            .catch(function (error) {
+                res.status(500).json(error);
+            })
     }
 }

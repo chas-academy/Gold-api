@@ -86,5 +86,11 @@ module.exports = {
             },
 
         })
+            .then(function (int_order) {
+                res.status(200).json(int_order);
+            })
+            .catch(function (error) {
+                res.status(500).json(error);
+            })
     }
 }

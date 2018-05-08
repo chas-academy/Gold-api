@@ -48,8 +48,8 @@ module.exports = {
             }
 
         }, {
-            include: [models.order]
-        })
+                include: [models.order]
+            })
             .then(function (orders) {
                 res.status(200).json(orders);
             })
@@ -77,8 +77,8 @@ module.exports = {
                 }
 
             }, {
-                include: [models.order]
-            })
+                    include: [models.order]
+                })
         })
             .then(function (orders) {
                 res.status(200).json(orders);
@@ -95,5 +95,11 @@ module.exports = {
             },
 
         })
+            .then(function (orders) {
+                res.status(200).json(orders);
+            })
+            .catch(function (error) {
+                res.status(500).json(error);
+            })
     }
 }

@@ -33,6 +33,7 @@ module.exports = {
       }, {
         client_id: 7,
         order_type: 'order',
+        company_name: 'Mäklarringen',
         con_pers: 'Jakob',
         con_tel: '0712391234',
         datetime: '2018-05-24 16:30:00.000 +02:00',
@@ -40,6 +41,7 @@ module.exports = {
       }, {
         client_id: 7,
         order_type: 'complaint',
+        company_name: 'Mäklarringen',
         con_pers: 'Jakob',
         con_tel: '0712391234',
         datetime: '2018-05-24 19:00:00.000 +02:00',
@@ -47,6 +49,7 @@ module.exports = {
       }, {
         client_id: 8,
         order_type: 'order',
+        company_name: 'Hidden Company',
         con_pers: 'Mindy',
         con_tel: '0721292314',
         datetime: '2018-05-25 10:00:00.000 +02:00',
@@ -54,6 +57,7 @@ module.exports = {
       }, {
         client_id: 8,
         order_type: 'complaint',
+        company_name: 'Hidden Company',
         con_pers: 'Mindy',
         con_tel: '0721292314',
         datetime: '2018-05-25 16:00:00.000 +02:00',

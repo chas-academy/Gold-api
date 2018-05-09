@@ -15,6 +15,17 @@ module.exports = {
         })
     },
 
+	// Get all employees
+    allEmployees(req, res) {
+		User.find({where: { type: "employee" }, include: [{ model: models.service, as: "services" }] })
+		.then(function (user) {
+            res.status(200).json(user)
+		})
+		.catch(function (error) {
+            res.status(500).json(error)
+        })
+	},
+
 	// Find one user by ID
     find(req, res) {
 		User.findById(req.params.id, { include: [{ model: models.customer }, { model: models.service, as: "services" }] })

@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       values: ["order", "int_order", "complaint"],
       type: DataTypes.ENUM
     },
+    company_name: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
     con_pers: {
       allowNull: true,
       type: DataTypes.STRING

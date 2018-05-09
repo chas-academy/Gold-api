@@ -21,6 +21,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.ENUM("order", "int_order", "complaint")
       },
+      company_name: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
       con_pers: {
         allowNull: true,
         type: Sequelize.STRING

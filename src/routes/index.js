@@ -23,24 +23,24 @@ export default app => {
     app.get('/services/done', C.Auth.loginRequired, C.Services.showDone)
 
     //<--orders routes-->
-    app.get('/orders', C.Orders.index)
+    app.get('/orders', C.Auth.loginRequired, C.Orders.index)
     app.get('/orders/:id', C.Auth.loginRequired, C.Orders.show)
-    app.post('/orders/create', C.Orders.create)
-    app.put('/orders/update/:id', C.Orders.update)
+    app.post('/orders/create', C.Auth.loginRequired, C.Orders.create)
+    app.put('/orders/update/:id', C.Auth.loginRequired, C.Orders.update)
     app.delete('/orders/delete/:id', C.Auth.loginRequired, C.Orders.destroy)
 
     //<--internal orders routes-->
-    app.get('/int_orders', C.IntOrders.index)
-    app.get('/int_orders/:id', C.IntOrders.show)
-    app.post('/int_orders/create', C.IntOrders.create)
-    app.put('/int_orders/update/:id', C.IntOrders.update)
-    app.delete('/int_orders/delete/:id', C.IntOrders.destroy)
+    app.get('/int_orders', C.Auth.loginRequired, C.IntOrders.index)
+    app.get('/int_orders/:id', C.Auth.loginRequired, C.IntOrders.show)
+    app.post('/int_orders/create', C.Auth.loginRequired, C.IntOrders.create)
+    app.put('/int_orders/update/:id', C.Auth.loginRequired, C.IntOrders.update)
+    app.delete('/int_orders/delete/:id', C.Auth.loginRequired, C.IntOrders.destroy)
 
     //<--complaints-->
-    app.get('/complaints', C.Complaints.index)
-    app.get('/complaints/:id', C.Complaints.show)
-    app.post('/complaints/create', C.Complaints.create)
-    app.put('/complaints/update/:id', C.Complaints.update)
-    app.delete('/complaints/delete/:id', C.Complaints.destroy)
+    app.get('/complaints', C.Auth.loginRequired, C.Complaints.index)
+    app.get('/complaints/:id', C.Auth.loginRequired, C.Complaints.show)
+    app.post('/complaints/create', C.Auth.loginRequired, C.Complaints.create)
+    app.put('/complaints/update/:id', C.Auth.loginRequired, C.Complaints.update)
+    app.delete('/complaints/delete/:id', C.Auth.loginRequired, C.Complaints.destroy)
 
 }

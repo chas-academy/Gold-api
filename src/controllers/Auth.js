@@ -30,12 +30,15 @@ module.exports = {
                             res.status(200).json(user.get({ plain: true }))
                         })
                         .catch(function (error) {
-                            res.status(500).json(error)
+                            if (error.errors && error.errors[0].message != "pers_org_num must be unique") {
+                                User.destroy({ where: { pers_org_num: req.body.pers_org_num } })
+                            }
+                            res.status(500).json({ error: error })
                         })
                 })
             })
             .catch(function (error) {
-                res.status(500).json(error)
+                res.status(500).json({ error: error })
             })
     },
 
@@ -73,12 +76,12 @@ module.exports = {
                             res.status(200).json({ token: token })
                         }
                     } else {
-                        res.status(500).json({ error: error, msg: "Fel lösenord." })
+                        res.json({ error: "Fel lösenord." })
                     }
                 })
             })
             .catch(function (error) {
-                res.status(500).json({ error: error, msg: "Kan inte hitta användare med angiven pers-/orgnummer." })
+                res.json({ error: "Kan inte hitta användare med angiven pers-/orgnummer." })
             })
     },
 

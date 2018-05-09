@@ -65,24 +65,30 @@ module.exports = {
         }
         Service.findById(req.params.id, { include: [models.order] }).then(function (Service) {
             Service.update({
-                client_id: req.body.userId,
                 order_type: "order",
                 con_pers: req.body.con_pers,
                 con_tel: req.body.con_tel,
                 datetime: new Date(req.body.date + "T" + req.body.time),
-                order: {
-                    address: req.body.address,
-                    description: req.body.description,
-                    image_path: req.body.image_path
-                }
-
-            }, {
-                    include: [models.order]
+            })
+                .then(function (order) {
+                    Order.findById(req.params.id).then(function (Order) {
+                        Order.update({
+                            address: req.body.address,
+                            description: req.body.description,
+                            image_path: req.body.image_path
+                        })
+                            .then(function (order) {
+                                res.status(200).json({ service: Service, order: Order });
+                            })
+                            .catch(function (error) {
+                                res.status(500).json(error);
+                            })
+                    })
+                })
+                .catch(function (error) {
+                    res.status(500).json(error);
                 })
         })
-            .then(function (orders) {
-                res.status(200).json(orders);
-            })
             .catch(function (error) {
                 res.status(500).json(error);
             })

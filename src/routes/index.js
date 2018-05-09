@@ -23,10 +23,10 @@ export default app => {
     app.get('/services/done', C.Auth.loginRequired, C.Services.showDone)
 
     //<--orders routes-->
-    app.get('/orders', C.Auth.loginRequired, C.Orders.index)
+    app.get('/orders', C.Orders.index)
     app.get('/orders/:id', C.Auth.loginRequired, C.Orders.show)
-    app.post('/orders/create', C.Auth.loginRequired, C.Orders.create)
-    app.put('/orders/update/:id', C.Auth.loginRequired, C.Orders.update)
+    app.post('/orders/create', C.Orders.create)
+    app.put('/orders/update/:id', C.Orders.update)
     app.delete('/orders/delete/:id', C.Auth.loginRequired, C.Orders.destroy)
 
     //<--internal orders routes-->

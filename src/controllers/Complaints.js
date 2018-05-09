@@ -59,22 +59,19 @@ module.exports = {
         // if (hours < 10 && hours.length < 2) {
         //     req.body.time = "0" + req.body.time
         // }
-        Service.findById(req.params.id, { include: [models.complaint] }).then(function (Service) {
-            Service.update({
-                order_type: "complaint",
-                datetime: new Date(req.body.date + "T" + req.body.time),
-                complaint: {
-                    description: req.body.description,
-                    image_path: req.body.image_path
-                }
-
-            }, {
-                    include: [models.complaint]
+        Complaint.findById(req.params.id).then(function (Complaint) {
+            Complaint.update({
+                // datetime: new Date(req.body.date + "T" + req.body.time),
+                description: req.body.description,
+                image_path: req.body.image_path
+            })
+                .then(function (complaint) {
+                    res.status(200).json(complaint);
+                })
+                .catch(function (error) {
+                    res.status(500).json(error);
                 })
         })
-            .then(function (complaint) {
-                res.status(200).json(complaint);
-            })
             .catch(function (error) {
                 res.status(500).json(error);
             })

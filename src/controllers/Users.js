@@ -18,7 +18,7 @@ module.exports = {
 
 	// Get all employees
     allEmployees(req, res) {
-		User.find({ where: { type: "employee" }, include: [{ model: models.service, as: "services" }] })
+		User.findAll({ where: { type: "employee" }, include: [{ model: models.service, as: "services" }] })
 		.then(function (employees) {
             res.status(200).json(employees)
 		})
@@ -29,7 +29,7 @@ module.exports = {
 
 	// Get all customers
     allCustomers(req, res) {
-		User.find({ where: { type: "customer" }, include: [{ model: models.customer }, { model: models.service, as: "services" }] })
+		User.findAll({ where: { type: "customer" }, include: [{ model: models.customer }, { model: models.service, as: "services" }] })
 		.then(function (customers) {
             res.status(200).json(customers)
 		})
@@ -40,7 +40,7 @@ module.exports = {
 
 	// Get all private customers
     allPrivates(req, res) {
-		Customer.find({ where: { type: "private" }, include: [{ model: models.user }, { model: models.service, as: "services" }] })
+		Customer.findAll({ where: { type: "private" }, include: [{ model: models.user }, { model: models.service, as: "services" }] })
 		.then(function (privates) {
             res.status(200).json(privates)
 		})
@@ -51,7 +51,7 @@ module.exports = {
 
 	// Get all company customers
     allCompanies(req, res) {
-		Customer.find({ where: { type: "company" }, include: [{ model: models.user }, { model: models.service, as: "services" }] })
+		Customer.findAll({ where: { type: "company" }, include: [{ model: models.user }, { model: models.service, as: "services" }] })
 		.then(function (companies) {
             res.status(200).json(companies)
 		})

@@ -24,6 +24,7 @@ export default app => {
     //<--services routes-->
     app.get('/services', C.Auth.loginRequired, C.Services.index)
     app.get('/services/new', C.Auth.loginRequired, C.Services.showNew)
+    app.get('/services/assigned', C.Auth.loginRequired, C.Services.showAssigned)
     app.get('/services/taken', C.Auth.loginRequired, C.Services.showTaken)
     app.get('/services/done', C.Auth.loginRequired, C.Services.showDone)
 

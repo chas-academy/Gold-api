@@ -1,5 +1,6 @@
 var models = require('../models');
 var User = require('../models').user;
+var Customer = require('../models').customer;
 const bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -17,7 +18,51 @@ module.exports = {
 
 	// Get all employees
     allEmployees(req, res) {
-		User.find({where: { type: "employee" }, include: [{ model: models.service, as: "services" }] })
+		User.find({ where: { type: "employee" }, include: [{ model: models.service, as: "services" }] })
+		.then(function (employees) {
+            res.status(200).json(employees)
+		})
+		.catch(function (error) {
+            res.status(500).json(error)
+        })
+	},
+
+	// Get all customers
+    allCustomers(req, res) {
+		User.find({ where: { type: "customer" }, include: [{ model: models.customer }, { model: models.service, as: "services" }] })
+		.then(function (customers) {
+            res.status(200).json(customers)
+		})
+		.catch(function (error) {
+            res.status(500).json(error)
+        })
+	},
+
+	// Get all private customers
+    allPrivate(req, res) {
+		Customer.find({ where: { type: "private" }, include: [{ model: models.user }, { model: models.service, as: "services" }] })
+		.then(function (private) {
+            res.status(200).json(private)
+		})
+		.catch(function (error) {
+            res.status(500).json(error)
+        })
+	},
+
+	// Get all company customers
+    allCompanies(req, res) {
+		Customer.find({ where: { type: "company" }, include: [{ model: models.user }, { model: models.service, as: "services" }] })
+		.then(function (companies) {
+            res.status(200).json(companies)
+		})
+		.catch(function (error) {
+            res.status(500).json(error)
+        })
+	},
+
+	// Find one user (non-customer) by ID
+    findUser(req, res) {
+		User.findById( req.params.id, { include: [{ model: models.customer }, { model: models.service, as: "services" }] })
 		.then(function (user) {
             res.status(200).json(user)
 		})
@@ -26,11 +71,11 @@ module.exports = {
         })
 	},
 
-	// Find one user by ID
-    find(req, res) {
-		User.findById(req.params.id, { include: [{ model: models.customer }, { model: models.service, as: "services" }] })
-		.then(function (user) {
-            res.status(200).json(user)
+	// Find one customer by ID
+    findCustomer(req, res) {
+		Customer.findById( req.params.id, { include: [{ model: models.user }, { model: models.service, as: "services" }] })
+		.then(function (customer) {
+            res.status(200).json(customer)
 		})
 		.catch(function (error) {
             res.status(500).json(error)
@@ -39,7 +84,7 @@ module.exports = {
 
 	// Create an user admin
     createAdmin(req, res) {
-		User.sync({force: false, logging: false})
+		User.sync({ force: false, logging: false })
 		.then(function () {
 			bcrypt.hash(req.body.password, 10, function(error, hash) {
 				User.create({
@@ -63,7 +108,7 @@ module.exports = {
 
 	// Create an user employee
     createEmployee(req, res) {
-		User.sync({force: false, logging: false})
+		User.sync({ force: false, logging: false })
 		.then(function () {
 			bcrypt.hash(req.body.password, 10, function(error, hash) {
 				User.create({
@@ -87,7 +132,7 @@ module.exports = {
 
 	// Create an user customer
     createCustomer(req, res) {
-		User.sync({force: false, logging: false})
+		User.sync({ force: false, logging: false })
 		.then(function () {
 			bcrypt.hash(req.body.password, 10, function(error, hash) {
 				User.create({

@@ -7,8 +7,13 @@ export default app => {
     app.post('/login', C.Auth.login)
 
     //<--users routes-->
-    app.get('/users', C.Auth.loginRequired, C.Users.all)
-    app.get('/users/:id', C.Auth.loginRequired, C.Users.find)
+    app.get('/users', C.Auth.loginRequired, C.Users.all) // all users
+    app.get('/users/:id', C.Auth.loginRequired, C.Users.findUser) // find employee / admin by ID
+    app.get('/employees', C.Auth.loginRequired, C.Users.allEmployees) // find all employees
+    app.get('/customers', C.Auth.loginRequired, C.Users.allCustomers) // find all customers
+    app.get('/customers/private', C.Auth.loginRequired, C.Users.allPrivate) // find all private customers
+    app.get('/customers/companies', C.Auth.loginRequired, C.Users.allCompanies) // find all company customers
+    app.get('/customers/:id', C.Auth.loginRequired, C.Users.findCustomer) // find cusomer by ID
     app.post('/users/create/admin', C.Auth.loginRequired, C.Users.createAdmin)
     app.post('/users/create/employee', C.Auth.loginRequired, C.Users.createEmployee)
     app.post('/users/create/customer', C.Auth.loginRequired, C.Users.createCustomer)

@@ -39,10 +39,10 @@ module.exports = {
 	},
 
 	// Get all private customers
-    allPrivate(req, res) {
+    allPrivates(req, res) {
 		Customer.find({ where: { type: "private" }, include: [{ model: models.user }, { model: models.service, as: "services" }] })
-		.then(function (private) {
-            res.status(200).json(private)
+		.then(function (privates) {
+            res.status(200).json(privates)
 		})
 		.catch(function (error) {
             res.status(500).json(error)

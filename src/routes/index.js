@@ -11,7 +11,7 @@ export default app => {
     app.get('/users/:id', C.Auth.loginRequired, C.Users.findUser) // find employee / admin by ID
     app.get('/employees', C.Auth.loginRequired, C.Users.allEmployees) // find all employees
     app.get('/customers', C.Auth.loginRequired, C.Users.allCustomers) // find all customers
-    app.get('/customers/private', C.Auth.loginRequired, C.Users.allPrivate) // find all private customers
+    app.get('/customers/privates', C.Auth.loginRequired, C.Users.allPrivates) // find all private customers
     app.get('/customers/companies', C.Auth.loginRequired, C.Users.allCompanies) // find all company customers
     app.get('/customers/:id', C.Auth.loginRequired, C.Users.findCustomer) // find cusomer by ID
     app.post('/users/create/admin', C.Auth.loginRequired, C.Users.createAdmin)

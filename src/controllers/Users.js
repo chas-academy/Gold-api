@@ -82,6 +82,55 @@ module.exports = {
         })
 	},
 
+	    /*FIND NEW orders */
+
+    findNew(req, res) {
+        User.findById(req.params.id, { include: [{ model: models.customer },{ model: models.service, as: "services", where: {order_type:"order", status:"new"}}]})
+        .then(function (user) {
+            res.status(200).json(user)
+        })
+        .catch(function (error) {
+            res.status(500).json(error)
+        })
+    },
+
+    /* FIND ASSIGNED orders */
+
+    findAssigned(req, res) {
+        User.findById(req.params.id, { include: [{ model: models.customer },{ model: models.service, as: "services", where: { status:"assigned"}}]})
+        .then(function (user) {
+            res.status(200).json(user)
+        })
+        .catch(function (error) {
+            res.status(500).json(error)
+        })
+    },
+
+
+    /* FIND TAKEN orders */
+
+    findTaken(req, res) {
+        User.findById(req.params.id, { include: [{ model: models.customer },{ model: models.service, as: "services", where: { status:"taken"}}]})
+        .then(function (user) {
+            res.status(200).json(user)
+        })
+        .catch(function (error) {
+            res.status(500).json(error)
+        })
+    },
+
+    /* FIND FINISHED orders */
+    
+    findDone(req, res) {
+        User.findById(req.params.id, { include: [{ model: models.customer },{ model: models.service, as: "services", where: { status:"done"}}]})
+        .then(function (user) {
+            res.status(200).json(user)
+        })
+        .catch(function (error) {
+            res.status(500).json(error)
+        })
+    },
+
 	// Create an user admin
     createAdmin(req, res) {
 		User.sync({ force: false, logging: false })

@@ -76,7 +76,7 @@ module.exports = {
         con_tel: null,
         datetime: null,
         status: 'new'
-      }, {
+      },{
         id: 11,
         client_id: 8,
         order_type: 'order',
@@ -88,10 +88,10 @@ module.exports = {
         id: 12,
         client_id: 8,
         order_type: 'order',
-        con_pers: 'Mindy',
+        con_pers: 'tyrone',
         con_tel: '0721292314',
         datetime: '2018-05-25 16:00:00.000 +02:00',
-        status: 'done'
+        status: 'taken'
       }, {
         id: 13,
         client_id: 8,
@@ -100,7 +100,8 @@ module.exports = {
         con_tel: '0721292314',
         datetime: '2018-05-25 16:00:00.000 +02:00',
         status: 'done'
-      }], {});
+      }
+    ], {});
   },
 
   down: (queryInterface, Sequelize) => {

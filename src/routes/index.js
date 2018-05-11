@@ -9,7 +9,7 @@ export default app => {
     //<--users routes-->
     app.get('/users/:id', C.Auth.loginRequired, C.Users.findUser) // find employee / admin by ID
     app.get('/users', C.Auth.loginRequired, C.Users.all) // all users
-    app.get('/admins', C.Users.allAdmins) // find all admins
+    app.get('/admins', C.Auth.loginRequired, C.Users.allAdmins) // find all admins
     app.get('/employees', C.Auth.loginRequired, C.Users.allEmployees) // find all employees
     app.get('/customers/privates', C.Auth.loginRequired, C.Users.allPrivates) // find all private customers
     app.get('/customers/companies', C.Auth.loginRequired, C.Users.allCompanies) // find all company customers
@@ -35,7 +35,7 @@ export default app => {
     app.get('/orders/taken', C.Auth.loginRequired, C.Orders.findTaken)
     app.get('/orders/done', C.Auth.loginRequired, C.Orders.findDone)
     app.get('/orders/:id', C.Auth.loginRequired, C.Orders.show)
-    app.get('/orders', C.Orders.index)
+    app.get('/orders', C.Auth.loginRequired, C.Orders.index)
     app.post('/orders/create', C.Auth.loginRequired, C.Orders.create)
     app.put('/orders/update/:id', C.Auth.loginRequired, C.Orders.update)
     app.delete('/orders/delete/:id', C.Auth.loginRequired, C.Orders.destroy)

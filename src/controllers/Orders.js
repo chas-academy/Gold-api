@@ -115,7 +115,7 @@ module.exports = {
                     res.status(200).json({ files: files, fields: fields, order: order });
                 })
                 .catch(function (error) {
-                    res.status(500).json(error);
+                    res.status(500).json({ error: error });
                 });
         })
     },

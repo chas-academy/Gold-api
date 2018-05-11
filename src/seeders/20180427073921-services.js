@@ -76,6 +76,30 @@ module.exports = {
         con_tel: null,
         datetime: null,
         status: 'new'
+      }, {
+        id: 11,
+        client_id: 8,
+        order_type: 'order',
+        con_pers: 'Bigman shaq',
+        con_tel: '0721255555',
+        datetime: '2018-05-25 16:00:00.000 +02:00',
+        status: 'assigned'
+      },{
+        id: 12,
+        client_id: 8,
+        order_type: 'order',
+        con_pers: 'Mindy',
+        con_tel: '0721292314',
+        datetime: '2018-05-25 16:00:00.000 +02:00',
+        status: 'done'
+      }, {
+        id: 13,
+        client_id: 8,
+        order_type: 'order',
+        con_pers: 'hitler',
+        con_tel: '0721292314',
+        datetime: '2018-05-25 16:00:00.000 +02:00',
+        status: 'done'
       }], {});
   },
 

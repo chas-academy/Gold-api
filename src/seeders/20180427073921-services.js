@@ -77,7 +77,6 @@ module.exports = {
         datetime: null,
         status: 'new'
       },{
-        id: 11,
         client_id: 8,
         order_type: 'order',
         con_pers: 'Bigman shaq',
@@ -85,7 +84,6 @@ module.exports = {
         datetime: '2018-05-25 16:00:00.000 +02:00',
         status: 'assigned'
       },{
-        id: 12,
         client_id: 8,
         order_type: 'order',
         con_pers: 'tyrone',
@@ -93,7 +91,6 @@ module.exports = {
         datetime: '2018-05-25 16:00:00.000 +02:00',
         status: 'taken'
       }, {
-        id: 13,
         client_id: 8,
         order_type: 'order',
         con_pers: 'hitler',

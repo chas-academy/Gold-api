@@ -29,6 +29,36 @@ module.exports = {
                 res.status(500).json(error);
             });
     },
+    //find all assigned internal orders
+    findAssigned(req, res) {
+        intOrder.findAll({ include: [{ model: models.service, where: { order_type: "int_order", status: "assigned" } }] })
+            .then(function (int_order) {
+                res.status(200).json(int_order)
+            })
+            .catch(function (error) {
+                res.status(500).json(error)
+            })
+    },
+    //find all taken internal orders
+    findTaken(req, res) {
+        intOrder.findAll({ include: [{ model: models.service, where: { order_type: "int_order", status: "taken" } }] })
+            .then(function (int_order) {
+                res.status(200).json(int_order)
+            })
+            .catch(function (error) {
+                res.status(500).json(error)
+            })
+    },
+    //find all done internal orders
+    findDone(req, res) {
+        intOrder.findAll({ include: [{ model: models.service, where: { order_type: "int_order", status: "done" } }] })
+            .then(function (int_order) {
+                res.status(200).json(int_order)
+            })
+            .catch(function (error) {
+                res.status(500).json(error)
+            })
+    },
     //Create internal orders
     create(req, res) {
         // let hours = req.body.time.split(":")[0]

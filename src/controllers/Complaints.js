@@ -29,6 +29,36 @@ module.exports = {
                 res.status(500).json(error);
             });
     },
+    //find all assigned complaints
+    findAssigned(req, res) {
+        Complaint.findAll({ include: [{ model: models.service, where: { order_type: "complaint", status: "assigned" } }] })
+            .then(function (complaint) {
+                res.status(200).json(complaint)
+            })
+            .catch(function (error) {
+                res.status(500).json(error)
+            })
+    },
+    //find all taken complaints
+    findTaken(req, res) {
+        Complaint.findAll({ include: [{ model: models.service, where: { order_type: "complaint", status: "taken" } }] })
+            .then(function (complaint) {
+                res.status(200).json(complaint)
+            })
+            .catch(function (error) {
+                res.status(500).json(error)
+            })
+    },
+    //find all done complaints
+    findDone(req, res) {
+        Complaint.findAll({ include: [{ model: models.service, where: { order_type: "complaint", status: "done" } }] })
+            .then(function (complaint) {
+                res.status(200).json(complaint)
+            })
+            .catch(function (error) {
+                res.status(500).json(error)
+            })
+    },
     //Create complaints
     create(req, res) {
         // let hours = req.body.time.split(":")[0]

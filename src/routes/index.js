@@ -21,6 +21,12 @@ export default app => {
     app.put('/customers/update/:id', C.Auth.loginRequired, C.Users.updateCustomer)
     app.delete('/users/delete/:id', C.Auth.loginRequired, C.Users.destroy)
 
+    //<--users specific rroutes on status-->
+    app.get('/users/:id/new' ,C.Users.findNew)
+    app.get('/users/:id/assigned' ,C.Users.findAssigned)
+    app.get('/users/:id/taken' ,C.Users.findTaken)
+    app.get('/users/:id/done' ,C.Users.findDone)
+
     //<--services routes-->
     app.get('/services', C.Auth.loginRequired, C.Services.index)
     app.get('/services/new', C.Auth.loginRequired, C.Services.showNew)

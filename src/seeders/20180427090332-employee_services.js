@@ -32,7 +32,16 @@ module.exports = {
       }, {
         userId: '4',
         serviceId: '8'
-      }], {});
+      }, {
+        userId: '2',
+        serviceId: '11'
+      }, {
+        userId: '2',
+        serviceId: '12'
+      },{
+        userId: '2',
+        serviceId: '13'
+      },], {});
   },
 
   down: (queryInterface, Sequelize) => {

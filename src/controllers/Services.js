@@ -15,6 +15,23 @@ module.exports = {
 				res.status(500).json(error);
 			});
 	},
+	findByCustomer(req, res) {
+		models.customer.findById(req.params.id, {
+			include: [{
+				model: models.service, as: "services", where: {
+					client_id: req.params.id
+				},
+				include: [{ model: models.order }, { model: models.complaint }]
+			},
+			{ model: models.user }]
+		})
+			.then(function (services) {
+				res.status(200).json(services);
+			})
+			.catch(function (error) {
+				res.status(500).json(error);
+			});
+	},
 	//Get a list of services with status "new"
 	showNew(req, res) {
 		Service.findAll({

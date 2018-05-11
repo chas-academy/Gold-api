@@ -31,6 +31,36 @@ module.exports = {
                 res.status(500).json(error);
             });
     },
+    //find all assigned orders
+    findAssigned(req, res) {
+        Order.findAll({ include: [{ model: models.service, where: { order_type: "order", status: "assigned" } }] })
+            .then(function (orders) {
+                res.status(200).json(orders)
+            })
+            .catch(function (error) {
+                res.status(500).json(error)
+            })
+    },
+    //find all taken orders
+    findTaken(req, res) {
+        Order.findAll({ include: [{ model: models.service, where: { order_type: "order", status: "taken" } }] })
+            .then(function (orders) {
+                res.status(200).json(orders)
+            })
+            .catch(function (error) {
+                res.status(500).json(error)
+            })
+    },
+    //find all done orders
+    findDone(req, res) {
+        Order.findAll({ include: [{ model: models.service, where: { order_type: "order", status: "done" } }] })
+            .then(function (orders) {
+                res.status(200).json(orders)
+            })
+            .catch(function (error) {
+                res.status(500).json(error)
+            })
+    },
     //Create orders
     create(req, res) {
         var form = new formidable.IncomingForm()
@@ -38,17 +68,17 @@ module.exports = {
         form.keepExtensions = true
         var fields = {}
         var files = []
-        form.on('field', function(field, value) {
+        form.on('field', function (field, value) {
             fields[field] = value
         })
-        form.on('file', function(field, file) {
+        form.on('file', function (field, file) {
             files.push(file)
         })
-        
+
         form.parse(req, (err, pFields, pFiles) => {
             if (err) res.status(500).json({ error: err })
             files.forEach((image, i) => {
-                fs.rename(image.path, 'src/images/order_img/' + image.name, function(error){
+                fs.rename(image.path, 'src/images/order_img/' + image.name, function (error) {
                     if (error) {
                         console.log(error)
                     }
@@ -64,7 +94,7 @@ module.exports = {
             files.forEach(file => {
                 image_paths.push(file.path)
             })
-            
+
             Service.create({
                 client_id: fields.client_id,
                 order_type: "order",
@@ -79,14 +109,14 @@ module.exports = {
                 }
 
             }, {
-                include: [models.order]
-            })
-            .then(function (order) {
-                res.status(200).json({ files: files, fields: fields, order: order });
-            })
-            .catch(function (error) {
-                res.status(500).json(error);
-            });
+                    include: [models.order]
+                })
+                .then(function (order) {
+                    res.status(200).json({ files: files, fields: fields, order: order });
+                })
+                .catch(function (error) {
+                    res.status(500).json(error);
+                });
         })
     },
     //Update orders 

@@ -76,7 +76,29 @@ module.exports = {
         con_tel: null,
         datetime: null,
         status: 'new'
-      }], {});
+      },{
+        client_id: 8,
+        order_type: 'order',
+        con_pers: 'Bigman shaq',
+        con_tel: '0721255555',
+        datetime: '2018-05-25 16:00:00.000 +02:00',
+        status: 'assigned'
+      },{
+        client_id: 8,
+        order_type: 'order',
+        con_pers: 'tyrone',
+        con_tel: '0721292314',
+        datetime: '2018-05-25 16:00:00.000 +02:00',
+        status: 'taken'
+      }, {
+        client_id: 8,
+        order_type: 'order',
+        con_pers: 'hitler',
+        con_tel: '0721292314',
+        datetime: '2018-05-25 16:00:00.000 +02:00',
+        status: 'done'
+      }
+    ], {});
   },
 
   down: (queryInterface, Sequelize) => {

@@ -15,6 +15,18 @@ module.exports = {
 				res.status(500).json(error);
 			});
 	},
+	showNew(req, res) {
+		Service.findById(req.params.id, {
+			include: [{ model: models.internal_order },
+			{ model: models.order }, { model: models.complaint }]
+		})
+			.then(function (service) {
+				res.status(200).json(service);
+			})
+			.catch(function (error) {
+				res.status(500).json(error);
+			});
+	},
 	//Get a list of services with status "new"
 	showNew(req, res) {
 		Service.findAll({

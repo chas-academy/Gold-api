@@ -15,28 +15,6 @@ module.exports = {
       type: {
         allowNull: false,
         type: Sequelize.ENUM("private", "company")
-      },
-      email: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        unique: true
-      },
-      tel: {
-        allowNull: false,
-        type: Sequelize.STRING(20),
-        unique: true
-      },
-      address: {
-        allowNull: false,
-        type: Sequelize.TEXT
-      },
-      lat: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      lon: {
-        allowNull: false,
-        type: Sequelize.STRING
       }
     });
   },

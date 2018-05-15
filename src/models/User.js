@@ -20,16 +20,35 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     },
-    pers_org_num: {
+    email: {
       allowNull: false,
       type: DataTypes.STRING,
-      unique: true
+      unique: true,
+      validate: {
+        isEmail: true
+      }
     },
     password: {
       allowNull: false,
       type: DataTypes.STRING
-    }
-  }, {
+    }, 
+    tel: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      unique: true
+    },
+    address: {
+      allowNull: false,
+      type: DataTypes.TEXT
+    },
+    lat: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    lon: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
     timestamps: false
   });
   User.associate = function (models) {
@@ -42,7 +61,6 @@ module.exports = (sequelize, DataTypes) => {
     User.belongsToMany(models.service, {
       as: "services",
       through: "employee_services",
-      timestamps: false
     });
   };
   return User;

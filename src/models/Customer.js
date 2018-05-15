@@ -14,35 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         "private",
         "company"
       ]
-    },
-    email: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      unique: true,
-      validate: {
-        isEmail: true
-      }
-    },
-    tel: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      unique: true
-    },
-    address: {
-      allowNull: false,
-      type: DataTypes.TEXT
-    },
-    lat: {
-      allowNull: false,
-      type: DataTypes.STRING
-    },
-    lon: {
-      allowNull: false,
-      type: DataTypes.STRING
-    }
-  }, {
+    }, 
     timestamps: false
   });
+
   Customer.associate = function (models) {
     Customer.belongsTo(models.user, {
       foreignKey: 'user_id',
@@ -56,6 +31,14 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'cascade',
       hooks: true
     });
+
+    Customer.belongsToMany(models.user, {
+      as: 'customer_employees',
+      through: "employees",
+      onDelete: 'cascade',
+      hooks: true
+    });
+
   };
   return Customer;
 };

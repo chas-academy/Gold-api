@@ -16,15 +16,36 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      pers_org_num: {
+      email: {
         allowNull: false,
-        type: Sequelize.STRING(20),
-        unique: true
+        type: DataTypes.STRING,
+        unique: true,
+        validate: {
+          isEmail: true
+        }
       },
       password: {
         allowNull: false,
         type: Sequelize.STRING
-      }
+      },
+      tel: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        unique: true
+      },
+      address: {
+        allowNull: false,
+        type: DataTypes.TEXT
+      },
+      lat: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      lon: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      timestamps: false
     });
   },
   down: (queryInterface, Sequelize) => {

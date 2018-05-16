@@ -216,7 +216,7 @@ module.exports = {
 
 	// Update an user customer
 	updateCustomer(req, res) {
-		User.findById(req.params.id, { include: [models.customer] })
+		User.findById(req.params.id)
 			.then(function (User) {
 				if (req.body.newPassword) {
 					bcrypt.hash(req.body.newPassword, 10, function (error, hash) {
@@ -224,18 +224,26 @@ module.exports = {
 							name: req.body.name,
 							email: req.body.email,
 							tel: req.body.tel,
-							password: hash,
-							customer: {
-								type: req.body.type,
-								address: req.body.address,
-								lat: req.body.lat,
-								lon: req.body.lon
-							}
-						}, {
-							include: [models.customer]
+							password: hash
 						})
 						.then(function (user) {
-							res.status(200).json({ message: "Kundkonto uppdaterat" })
+							Customer.findById(req.params.id).then(function (Customer) {
+								Customer.update({
+									type: req.body.type,
+									address: req.body.address,
+									lat: req.body.lat,
+									lon: req.body.lon
+								})
+								.then(function () {
+									res.status(200).json({ message: "Kundkonto uppdaterat" })
+								})
+								.catch(function (error) {
+									res.status(500).json({ error: error })
+								})
+							})
+							.catch(function (error) {
+								res.status(500).json({ error: error })
+							})
 						})
 						.catch(function (error) {
 							res.status(500).json({ error: error })
@@ -245,18 +253,26 @@ module.exports = {
 					User.update({
 						name: req.body.name,
 						email: req.body.email,
-						tel: req.body.tel,
-						customer: {
-							type: req.body.type,
-							address: req.body.address,
-							lat: req.body.lat,
-							lon: req.body.lon
-						}
-					}, {
-						include: [models.customer]
+						tel: req.body.tel
 					})
 					.then(function (user) {
-						res.status(200).json({ message: "Kundkonto uppdaterat" })
+						Customer.findById(req.params.id).then(function (Customer) {
+							Customer.update({
+								type: req.body.type,
+								address: req.body.address,
+								lat: req.body.lat,
+								lon: req.body.lon
+							})
+							.then(function () {
+								res.status(200).json({ message: "Kundkonto uppdaterat" })
+							})
+							.catch(function (error) {
+								res.status(500).json({ error: error })
+							})
+						})
+						.catch(function (error) {
+							res.status(500).json({ error: error })
+						})
 					})
 					.catch(function (error) {
 						res.status(500).json({ error: error })

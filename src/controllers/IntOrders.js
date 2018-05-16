@@ -74,25 +74,41 @@ module.exports = {
     },
     //Update internal orders 
     update(req, res) {
-        // let hours = req.body.time.split(":")[0]
-        // if (hours < 10 && hours.length < 2) {
-        //     req.body.time = "0" + req.body.time
-        // }
-        intOrder.findById(req.params.id).then(function (intOrder) {
-            intOrder.update({
-                description: req.body.description,
-                image_path: req.body.image_path
+        let hours = req.body.time.split(":")[0]
+        if (hours < 10 && hours.length < 2) {
+            req.body.time = "0" + req.body.time
+        }
+        Service.findById(req.params.id).then(function (Service) {
+            Service.update({
+                order_type: "int_order",
+                con_pers: req.body.con_pers,
+                con_tel: req.body.con_tel,
+                datetime: new Date(req.body.date + "T" + req.body.time)
             })
-                .then(function (internal_order) {
-                    res.status(200).json(internal_order);
+            .then(function () {
+                intOrder.findById(req.params.id).then(function (intOrder) {
+                    intOrder.update({
+                        description: req.body.description,
+                        image_path: req.body.image_path
+                    })
+                    .then(function () {
+                        res.status(200).json({ message: "Internal order updated" });
+                    })
+                    .catch(function (error) {
+                        res.status(500).json({ message: "Couldn't update internal order" })
+                    })
                 })
                 .catch(function (error) {
-                    res.status(500).json(error);
+                    res.status(500).json({ message: "Couldn't find internal order" })
                 })
-        })
-            .catch(function (error) {
-                res.status(500).json(error);
             })
+            .catch(function (error) {
+                res.status(500).json({ message: "Couldn't update service" })
+            })
+        })
+        .catch(function (error) {
+            res.status(500).json({ message: "Couldn't find service" })
+        })
     },
     //Delete internal orders by id
     destroy(req, res) {

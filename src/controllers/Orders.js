@@ -115,35 +115,38 @@ module.exports = {
         if (hours < 10 && hours.length < 2) {
             req.body.time = "0" + req.body.time
         }
-        Service.findById(req.params.id, { include: [models.order] }).then(function (Service) {
+        Service.findById(req.params.id).then(function (Service) {
             Service.update({
                 order_type: "order",
                 con_pers: req.body.con_pers,
                 con_tel: req.body.con_tel,
                 datetime: new Date(req.body.date + "T" + req.body.time),
             })
-                .then(function (order) {
-                    Order.findById(req.params.id).then(function (Order) {
-                        Order.update({
-                            address: req.body.address,
-                            description: req.body.description,
-                            image_path: req.body.image_path
-                        })
-                            .then(function (order) {
-                                res.status(200).json({ service: Service, order: Order });
-                            })
-                            .catch(function (error) {
-                                res.status(500).json(error);
-                            })
+            .then(function () {
+                Order.findById(req.params.id).then(function (Order) {
+                    Order.update({
+                        address: req.body.address,
+                        description: req.body.description,
+                        image_path: req.body.image_path
+                    })
+                    .then(function () {
+                        res.status(200).json({ message: "Order updated" })
+                    })
+                    .catch(function (error) {
+                        res.status(500).json({ message: "Couldn't update order" })
                     })
                 })
                 .catch(function (error) {
-                    res.status(500).json(error);
+                    res.status(500).json({ message: "Couldn't find order" })
                 })
-        })
-            .catch(function (error) {
-                res.status(500).json(error);
             })
+            .catch(function (error) {
+                res.status(500).json({ message: "Couldn't update service" })
+            })
+        })
+        .catch(function (error) {
+            res.status(500).json({ message: "Couldn't find service" })
+        })
     },
     //Delete order by id
     destroy(req, res) {
@@ -153,11 +156,11 @@ module.exports = {
             },
 
         })
-            .then(function (orders) {
-                res.status(200).json(orders);
-            })
-            .catch(function (error) {
-                res.status(500).json(error);
-            })
+        .then(function (orders) {
+            res.status(200).json(orders);
+        })
+        .catch(function (error) {
+            res.status(500).json(error);
+        })
     }
 }

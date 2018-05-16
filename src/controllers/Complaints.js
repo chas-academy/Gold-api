@@ -75,26 +75,41 @@ module.exports = {
     },
     //Update complaints
     update(req, res) {
-        // let hours = req.body.time.split(":")[0]
-        // if (hours < 10 && hours.length < 2) {
-        //     req.body.time = "0" + req.body.time
-        // }
-        Complaint.findById(req.params.id).then(function (Complaint) {
-            Complaint.update({
-                // datetime: new Date(req.body.date + "T" + req.body.time),
-                description: req.body.description,
-                image_path: req.body.image_path
+        let hours = req.body.time.split(":")[0]
+        if (hours < 10 && hours.length < 2) {
+            req.body.time = "0" + req.body.time
+        }
+        Service.findById(req.params.id).then(function (Service) {
+            Service.update({
+                order_type: "complaint",
+                con_pers: req.body.con_pers,
+                con_tel: req.body.con_tel,
+                datetime: new Date(req.body.date + "T" + req.body.time),
             })
-                .then(function (complaint) {
-                    res.status(200).json(complaint);
+            .then(function () {
+                Complaint.findById(req.params.id).then(function (Complaint) {
+                    Complaint.update({
+                        description: req.body.description,
+                        image_path: req.body.image_path
+                    })
+                    .then(function () {
+                        res.status(200).json({ message: "Complaint updated" })
+                    })
+                    .catch(function (error) {
+                        res.status(500).json({ message: "Couldn't update complaint" })
+                    })
                 })
                 .catch(function (error) {
-                    res.status(500).json(error);
+                    res.status(500).json({ message: "Couldn't find complaint" })
                 })
-        })
-            .catch(function (error) {
-                res.status(500).json(error);
             })
+            .catch(function (error) {
+                res.status(500).json({ message: "Couldn't update service" })
+            })
+        })
+        .catch(function (error) {
+            res.status(500).json({ message: "Couldn't find service" })
+        })
     },
     //Delete complaints by id
     destroy(req, res) {

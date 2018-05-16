@@ -21,9 +21,9 @@ export default app => {
     app.delete('/users/:id/delete', C.Auth.loginRequired, C.Users.destroy)
 
     //<--users specific rroutes on status-->
-    app.get('/users/:id/assigned',C.Users.findAssigned)
-    app.get('/users/:id/assignedInt',C.Users.findAssignedInt)
-    app.get('/users/:id/done',C.Users.findDone)
+    app.get('/employee/:id/assigned',C.Users.findAssigned)
+    app.get('/employee/:id/assignedInt',C.Users.findAssignedInt)
+    app.get('/employee/:id/done',C.Users.findDone)
 
     //<--services routes-->
     app.get('/customer/:id/services', C.Auth.loginRequired, C.Services.findByCustomer)

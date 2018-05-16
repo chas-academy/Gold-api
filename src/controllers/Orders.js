@@ -41,16 +41,6 @@ module.exports = {
                 res.status(500).json(error)
             })
     },
-    //find all taken orders
-    findTaken(req, res) {
-        Order.findAll({ include: [{ model: models.service, where: { order_type: "order", status: "taken" } }] })
-            .then(function (orders) {
-                res.status(200).json(orders)
-            })
-            .catch(function (error) {
-                res.status(500).json(error)
-            })
-    },
     //find all done orders
     findDone(req, res) {
         Order.findAll({ include: [{ model: models.service, where: { order_type: "order", status: "done" } }] })

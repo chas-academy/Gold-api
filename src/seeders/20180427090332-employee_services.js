@@ -41,6 +41,9 @@ module.exports = {
       },{
         userId: '2',
         serviceId: '13'
+      },{
+        userId: '2',
+        serviceId: '10'
       },], {});
   },
 

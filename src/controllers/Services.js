@@ -23,7 +23,7 @@ module.exports = {
 				},
 				include: [{ model: models.order }, { model: models.complaint }]
 			},
-			{ model: models.user }]
+			{ model: models.user, attributes: { exclude: ['password'] } }]
 		})
 			.then(function (services) {
 				res.status(200).json(services);
@@ -53,22 +53,6 @@ module.exports = {
 		Service.findAll({
 			where: {
 				status: "assigned"
-			},
-			include: [{ model: models.internal_order },
-			{ model: models.order }, { model: models.complaint }]
-		})
-			.then(function (services) {
-				res.status(200).json(services);
-			})
-			.catch(function (error) {
-				res.status(500).json(error);
-			});
-	},
-	//Get a list of services with status "taken"
-	showTaken(req, res) {
-		Service.findAll({
-			where: {
-				status: "taken"
 			},
 			include: [{ model: models.internal_order },
 			{ model: models.order }, { model: models.complaint }]

@@ -27,7 +27,7 @@ module.exports = {
       },
       image_path: {
         allowNull: true,
-        type: Sequelize.STRING(50)
+        type: Sequelize.ARRAY(Sequelize.STRING)
       }
     });
   },

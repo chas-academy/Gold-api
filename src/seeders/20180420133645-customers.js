@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('customers', [{
       user_id: '5',
       type: 'private',
-      address: 'Drottninggatan 14, 2tr',
+      address: 'Drottninggatan 14',
       lat: '59.3298085',
       lon: '18.0633878'
     }, {

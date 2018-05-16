@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.TEXT
       },
       image_path: {
-        type: Sequelize.STRING(50)
+        type: Sequelize.ARRAY(Sequelize.STRING)
       }
     });
   },

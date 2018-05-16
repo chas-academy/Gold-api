@@ -3,11 +3,11 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
       return queryInterface.bulkInsert('internal_orders', [{
-        service_id: 9,
+        service_id: 11,
         description: 'Buy plz some of those and more of these.',
         image_path: null
       }, {
-        service_id: 10,
+        service_id: 12,
         description: 'Buy plz some of those and more of these.',
         image_path: null
       }], {});

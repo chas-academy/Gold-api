@@ -24,6 +24,25 @@ module.exports = {
 			res.status(500).json({ error: "Kan inte hitta ärende" });
 		});
 	},
+	show(req, res) {
+		Service.findById(req.params.id, {
+			include: [
+				{
+					model: models.internal_order
+				}, {
+					model: models.order
+				}, {
+					model: models.complaint
+				}
+			]
+		})
+		.then(function (service) {
+			res.status(200).json(service)	
+		})
+		.catch(function (error) {
+			res.status(500).json({ error: "Kan inte hitta ärende" })
+		})
+	},
 	findByCustomer(req, res) {
 		models.customer.findById(req.params.id, {
 			include: [

@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     lat: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     lon: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     description: {
       allowNull: false,

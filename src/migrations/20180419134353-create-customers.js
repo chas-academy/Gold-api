@@ -22,11 +22,11 @@ module.exports = {
       },
       lat: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.DOUBLE
       },
       lon: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.DOUBLE
       }
     });
   },

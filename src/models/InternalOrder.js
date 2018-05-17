@@ -7,6 +7,18 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: false,
       type: DataTypes.INTEGER
     },
+    address: {
+      allowNull: false,
+      type: DataTypes.TEXT
+    },
+    lat: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    lon: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
     description: {
       allowNull: false,
       type: DataTypes.TEXT

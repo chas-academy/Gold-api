@@ -34,7 +34,7 @@ module.exports = {
                 })
             })
             .catch(function (error) {
-                res.status(500).json({ error: "Kan inte ansluta till server" })
+                res.status(500).json({ error: error })
             })
     },
 

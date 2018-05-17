@@ -8,15 +8,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     address: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.TEXT
     },
     lat: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.DOUBLE
     },
     lon: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.DOUBLE
     },
     description: {

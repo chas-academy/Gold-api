@@ -78,6 +78,7 @@ module.exports = {
     },
     //Create internal orders
     create(req, res) {
+        let isError = false
         let hours = req.body.time.split(":")[0]
         if (hours < 10 && hours.length < 2) {
             req.body.time = "0" + req.body.time
@@ -85,7 +86,13 @@ module.exports = {
         Service.create({
             order_type: "int_order",
             datetime: new Date(req.body.date + "T" + req.body.time),
+            con_pers: req.body.con_pers,
+            con_tel: req.body.con_tel,
+            status: "assigned",
             internal_order: {
+                address: req.body.address,
+                lat: req.body.lat,
+                lon: req.body.lon,
                 description: req.body.description,
                 image_path: req.body.image_path
             }
@@ -93,10 +100,30 @@ module.exports = {
             include: [models.internal_order]
         })
         .then(function (int_order) {
+            try {
+                req.body.employees.forEach(employee => {
+                    models.employee_service.create({
+                        userId: employeeasd,
+                        serviceId: int_order.id
+                    })
+                })
+            }
+            catch(error) {
+                res.status(500).json({ error: "Kan inte assigna anställda" })
+                isError = true
+                Service.destroy({
+                    where: {
+                        id: int_order.id
+                    }
+                })
+                throw error
+            }
             res.status(200).json({ message: "Intern beställning skapades" });
         })
         .catch(function (error) {
-            res.status(500).json({ error: "Kan inte skapa intern beställning" });
+            if (!isError) {
+                res.status(500).json({ error: "Kan inte skapa intern beställning" });
+            }
         });
     },
     //Update internal orders 

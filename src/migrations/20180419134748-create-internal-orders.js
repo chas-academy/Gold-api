@@ -13,15 +13,15 @@ module.exports = {
         }
       },
       address: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.TEXT
       },
       lat: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DOUBLE
       },
       lon: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DOUBLE
       },
       description: {
@@ -29,6 +29,7 @@ module.exports = {
         type: Sequelize.TEXT
       },
       image_path: {
+        allowNull: true,
         type: Sequelize.ARRAY(Sequelize.STRING)
       }
     });

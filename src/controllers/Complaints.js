@@ -10,6 +10,8 @@ module.exports = {
             include: [
                 {
                     model: models.service
+                }, {
+                    model: models.order
                 }
             ]
         })
@@ -26,6 +28,8 @@ module.exports = {
             include: [
                 {
                     model: models.service
+                }, {
+                    model: models.order
                 }
             ]
         })
@@ -46,6 +50,8 @@ module.exports = {
                         order_type: "complaint",
                         status: "assigned"
                     }
+                }, {
+                    model: models.order
                 }
             ]
         })
@@ -66,6 +72,8 @@ module.exports = {
                         order_type: "complaint",
                         status: "done"
                     }
+                }, {
+                    model: models.order
                 }
             ]
         })

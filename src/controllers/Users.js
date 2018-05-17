@@ -291,12 +291,12 @@ module.exports = {
 						tel: req.body.tel,
 						password: hash
 					})
-						.then(function (user) {
-							res.status(200).json({ message: "Användare skapades" })
-						})
-						.catch(function (error) {
-							res.status(500).json({ error: "Kan inte skapa användare" })
-						})
+					.then(function (user) {
+						res.status(200).json({ message: "Användare skapades" })
+					})
+					.catch(function (error) {
+						res.status(500).json({ error: error })
+					})
 				})
 			})
 			.catch(function (error) {

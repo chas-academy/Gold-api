@@ -13,7 +13,11 @@ module.exports = {
 					model: models.order
 				}, {
 					model: models.complaint,
-					as: "complaints"
+					include: [
+						{
+							model: models.order
+						}
+					]
 				}
 			]
 		})
@@ -32,7 +36,12 @@ module.exports = {
 				}, {
 					model: models.order
 				}, {
-					model: models.complaint
+					model: models.complaint,
+					include: [
+						{
+							model: models.order
+						}
+					]
 				}
 			]
 		})
@@ -56,7 +65,12 @@ module.exports = {
 						{
 							model: models.order
 						}, {
-							model: models.complaint
+							model: models.complaint,
+							include: [
+								{
+									model: models.order
+								}
+							]
 						}
 					]
 				}, {
@@ -86,7 +100,12 @@ module.exports = {
 				}, {
 					model: models.order
 				}, {
-					model: models.complaint
+					model: models.complaint,
+					include: [
+						{
+							model: models.order
+						}
+					]
 				}
 			]
 		})
@@ -109,7 +128,12 @@ module.exports = {
 				}, {
 					model: models.order
 				}, {
-					model: models.complaint
+					model: models.complaint,
+					include: [
+						{
+							model: models.order
+						}
+					]
 				}
 			]
 		})
@@ -132,7 +156,12 @@ module.exports = {
 				}, {
 					model: models.order
 				}, {
-					model: models.complaint
+					model: models.complaint,
+					include: [
+						{
+							model: models.order
+						}
+					]
 				}
 			]
 		})

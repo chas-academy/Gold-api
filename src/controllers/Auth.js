@@ -29,7 +29,7 @@ module.exports = {
                         res.status(200).json({ message: "Kontot skapades"})
                     })
                     .catch(function (error) {
-                        res.status(500).json({ error: "Kan inte skapa ett konto" })
+                        res.status(500).json({ error: error })
                     })
                 })
             })

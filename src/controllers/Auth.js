@@ -23,18 +23,18 @@ module.exports = {
                             lon: req.body.lon
                         }
                     }, {
-                            include: [models.customer]
-                        })
-                        .then(function (user) {
-                            res.status(200).json({ message: "Successfully registered"})
-                        })
-                        .catch(function (error) {
-                            res.status(500).json({ error: error })
-                        })
+                        include: [models.customer]
+                    })
+                    .then(function (user) {
+                        res.status(200).json({ message: "Kontot skapades"})
+                    })
+                    .catch(function (error) {
+                        res.status(500).json({ error: "Kan inte skapa ett konto" })
+                    })
                 })
             })
             .catch(function (error) {
-                res.status(500).json({ error: error })
+                res.status(500).json({ error: "Kan inte ansluta till server" })
             })
     },
 
@@ -72,12 +72,12 @@ module.exports = {
                             res.status(200).json({ token: token })
                         }
                     } else {
-                        res.json({ error: "Fel lösenord." })
+                        res.json({ error: "Fel lösenord" })
                     }
                 })
             })
             .catch(function (error) {
-                res.json({ error: "Kan inte hitta användare med angiven email." })
+                res.json({ error: "Kan inte hitta användare med angiven email" })
             })
     },
 
@@ -86,7 +86,7 @@ module.exports = {
         if (req.user) {
             next()
         } else {
-            res.status(401).json({ msg: "Unauthorized user." })
+            res.status(401).json({ error: "Unauthorized user" })
         }
     }
 }

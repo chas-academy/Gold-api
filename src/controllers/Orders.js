@@ -9,47 +9,79 @@ module.exports = {
     //Get a list of orders
     index(req, res) {
         Order.findAll({
-            include: [{ model: models.service }, { model: models.complaint }]
+            include: [
+                {
+                    model: models.service
+                }, {
+                    model: models.complaint
+                }
+            ]
         })
-            .then(function (orders) {
-                res.status(200).json(orders);
-            })
-            .catch(function (error) {
-                res.status(500).json(error);
-            });
+        .then(function (orders) {
+            res.status(200).json(orders);
+        })
+        .catch(function (error) {
+            res.status(500).json({ error: "Kan inte beställningar" });
+        });
     },
     //Get a list of orders by specific id
     show(req, res) {
         Order.findById(req.params.id, {
             include: [
-                { model: models.service }, { model: models.complaint, as: "complaints" }]
+                {
+                    model: models.service
+                }, {
+                    model: models.complaint,
+                    as: "complaints"
+                }
+            ]
         })
-            .then(function (orders) {
-                res.status(200).json(orders);
-            })
-            .catch(function (error) {
-                res.status(500).json(error);
-            });
+        .then(function (orders) {
+            res.status(200).json(orders);
+        })
+        .catch(function (error) {
+            res.status(500).json({ error: "Kan inte hitta beställning" });
+        });
     },
     //find all assigned orders
     findAssigned(req, res) {
-        Order.findAll({ include: [{ model: models.service, where: { order_type: "order", status: "assigned" } }] })
-            .then(function (orders) {
-                res.status(200).json(orders)
-            })
-            .catch(function (error) {
-                res.status(500).json(error)
-            })
+        Order.findAll({
+            include: [
+                {
+                    model: models.service,
+                    where: {
+                        order_type: "order",
+                        status: "assigned"
+                    }
+                }
+            ]
+        })
+        .then(function (orders) {
+            res.status(200).json(orders)
+        })
+        .catch(function (error) {
+            res.status(500).json({ error: "Kan inte beställningar" })
+        })
     },
     //find all done orders
     findDone(req, res) {
-        Order.findAll({ include: [{ model: models.service, where: { order_type: "order", status: "done" } }] })
-            .then(function (orders) {
-                res.status(200).json(orders)
-            })
-            .catch(function (error) {
-                res.status(500).json(error)
-            })
+        Order.findAll({
+            include: [
+                {
+                    model: models.service,
+                    where: {
+                        order_type: "order",
+                        status: "done"
+                    }
+                }
+            ]
+        })
+        .then(function (orders) {
+            res.status(200).json(orders)
+        })
+        .catch(function (error) {
+            res.status(500).json({ error: "Kan inte beställningar" })
+        })
     },
     //Create orders
     create(req, res) {
@@ -99,14 +131,14 @@ module.exports = {
                 }
 
             }, {
-                    include: [models.order]
-                })
-                .then(function (order) {
-                    res.status(200).json({ files: files, fields: fields, order: order });
-                })
-                .catch(function (error) {
-                    res.status(500).json({ error: error });
-                });
+                include: [models.order]
+            })
+            .then(function (order) {
+                res.status(200).json({ message: "Beställning skapades" });
+            })
+            .catch(function (error) {
+                res.status(500).json({ error: "Kan inte skapa beställning" });
+            });
         })
     },
     //Update orders 
@@ -130,22 +162,22 @@ module.exports = {
                         image_path: req.body.image_path
                     })
                     .then(function () {
-                        res.status(200).json({ message: "Order updated" })
+                        res.status(200).json({ message: "Beställning uppdaterades" })
                     })
                     .catch(function (error) {
-                        res.status(500).json({ message: "Couldn't update order" })
+                        res.status(500).json({ error: "Kan inte uppdatera beställning" })
                     })
                 })
                 .catch(function (error) {
-                    res.status(500).json({ message: "Couldn't find order" })
+                    res.status(500).json({ error: "Kan inte hitta beställning" })
                 })
             })
             .catch(function (error) {
-                res.status(500).json({ message: "Couldn't update service" })
+                res.status(500).json({ error: "Kan inte uppdatera ärende" })
             })
         })
         .catch(function (error) {
-            res.status(500).json({ message: "Couldn't find service" })
+            res.status(500).json({ error: "Kan inte hitta ärende" })
         })
     },
     //Delete order by id
@@ -154,13 +186,12 @@ module.exports = {
             where: {
                 id: req.params.id
             },
-
         })
         .then(function (orders) {
-            res.status(200).json(orders);
+            res.status(200).json({ message: "Beställning raderades" });
         })
         .catch(function (error) {
-            res.status(500).json(error);
+            res.status(500).json({ error: "Kan inte radera beställning" });
         })
     }
 }

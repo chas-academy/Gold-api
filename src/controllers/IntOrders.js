@@ -7,70 +7,97 @@ module.exports = {
     //Get a list of internal orders
     index(req, res) {
         intOrder.findAll({
-            include: [{ model: models.service }]
+            include: [
+                {
+                    model: models.service
+                }
+            ]
         })
-            .then(function (int_order) {
-                res.status(200).json(int_order);
-            })
-            .catch(function (error) {
-                res.status(500).json(error);
-            });
+        .then(function (int_order) {
+            res.status(200).json(int_order);
+        })
+        .catch(function (error) {
+            res.status(500).json({ error: "Kan inte hitta interna beställningar" });
+        });
     },
     //Get a list of internal orders by specific id
     show(req, res) {
         intOrder.findById(req.params.id, {
             include: [
-                { model: models.service }]
+                {
+                    model: models.service
+                }
+            ]
         })
-            .then(function (int_order) {
-                res.status(200).json(int_order);
-            })
-            .catch(function (error) {
-                res.status(500).json(error);
-            });
+        .then(function (int_order) {
+            res.status(200).json(int_order);
+        })
+        .catch(function (error) {
+            res.status(500).json({ error: "Kan inte hitta intern beställning" });
+        });
     },
     //find all assigned internal orders
     findAssigned(req, res) {
-        intOrder.findAll({ include: [{ model: models.service, where: { order_type: "int_order", status: "assigned" } }] })
-            .then(function (int_order) {
-                res.status(200).json(int_order)
-            })
-            .catch(function (error) {
-                res.status(500).json(error)
-            })
+        intOrder.findAll({
+            include: [
+                {
+                    model: models.service,
+                    where: {
+                        order_type: "int_order",
+                        status: "assigned"
+                    }
+                }
+            ]
+        })
+        .then(function (int_order) {
+            res.status(200).json(int_order)
+        })
+        .catch(function (error) {
+            res.status(500).json({ error: "Kan inte interna beställningar" })
+        })
     },
     //find all done internal orders
     findDone(req, res) {
-        intOrder.findAll({ include: [{ model: models.service, where: { order_type: "int_order", status: "done" } }] })
-            .then(function (int_order) {
-                res.status(200).json(int_order)
-            })
-            .catch(function (error) {
-                res.status(500).json(error)
-            })
+        intOrder.findAll({
+            include: [
+                {
+                    model: models.service,
+                    where: {
+                        order_type: "int_order",
+                        status: "done"
+                    }
+                }
+            ]
+        })
+        .then(function (int_order) {
+            res.status(200).json(int_order)
+        })
+        .catch(function (error) {
+            res.status(500).json({ error: "Kan inte hitta interna beställningar" })
+        })
     },
     //Create internal orders
     create(req, res) {
-        // let hours = req.body.time.split(":")[0]
-        // if (hours < 10 && hours.length < 2) {
-        //     req.body.time = "0" + req.body.time
-        // }
+        let hours = req.body.time.split(":")[0]
+        if (hours < 10 && hours.length < 2) {
+            req.body.time = "0" + req.body.time
+        }
         Service.create({
             order_type: "int_order",
-            // datetime: new Date(req.body.date + "T" + req.body.time),
+            datetime: new Date(req.body.date + "T" + req.body.time),
             internal_order: {
                 description: req.body.description,
                 image_path: req.body.image_path
             }
         }, {
-                include: [models.internal_order]
-            })
-            .then(function (int_order) {
-                res.status(200).json(int_order);
-            })
-            .catch(function (error) {
-                res.status(500).json(error);
-            });
+            include: [models.internal_order]
+        })
+        .then(function (int_order) {
+            res.status(200).json({ message: "Intern beställning skapades" });
+        })
+        .catch(function (error) {
+            res.status(500).json({ error: "Kan inte skapa intern beställning" });
+        });
     },
     //Update internal orders 
     update(req, res) {
@@ -92,22 +119,22 @@ module.exports = {
                         image_path: req.body.image_path
                     })
                     .then(function () {
-                        res.status(200).json({ message: "Internal order updated" });
+                        res.status(200).json({ message: "Intern beställning uppdaterades" });
                     })
                     .catch(function (error) {
-                        res.status(500).json({ message: "Couldn't update internal order" })
+                        res.status(500).json({ error: "Kan inte uppdatera intern beställning" })
                     })
                 })
                 .catch(function (error) {
-                    res.status(500).json({ message: "Couldn't find internal order" })
+                    res.status(500).json({ error: "Kan inte hitta intern beställning" })
                 })
             })
             .catch(function (error) {
-                res.status(500).json({ message: "Couldn't update service" })
+                res.status(500).json({ error: "Kan inte uppdatera ärende" })
             })
         })
         .catch(function (error) {
-            res.status(500).json({ message: "Couldn't find service" })
+            res.status(500).json({ error: "Kan inte hitta ärende" })
         })
     },
     //Delete internal orders by id
@@ -116,13 +143,12 @@ module.exports = {
             where: {
                 id: req.params.id
             },
-
         })
-            .then(function (int_order) {
-                res.status(200).json(int_order);
-            })
-            .catch(function (error) {
-                res.status(500).json(error);
-            })
+        .then(function (int_order) {
+            res.status(200).json({ message: "Intern beställning raderades" });
+        })
+        .catch(function (error) {
+            res.status(500).json({ error: "Kan inte radera intern beställning" });
+        })
     }
 }

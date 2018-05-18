@@ -203,8 +203,6 @@ module.exports = {
 			attributes: { exclude: ['password'] },
 			include: [
 				{
-					model: models.customer
-				}, {
 					model: models.service,
 					as: "services",
 					where: {
@@ -212,7 +210,16 @@ module.exports = {
 							[Op.not]: "int_order"
 						},
 						status: "assigned"
-					}
+					},
+					include: [
+						{
+							model: models.order
+						}, {
+							model: models.complaint
+						}, {
+							model: models.customer
+						}
+					]
 				}
 			]
 		})
@@ -233,14 +240,19 @@ module.exports = {
 			},
 			include: [
 				{
-					model: models.customer
-				}, {
 					model: models.service,
 					as: "services",
 					where: {
 						order_type: "int_order",
 						status: "assigned"
-					}
+					},
+					include: [
+						{
+							model: models.internal_order
+						}, {
+							model: models.customer
+						}
+					]
 				}
 			]
 		})
@@ -267,7 +279,18 @@ module.exports = {
 					as: "services",
 					where: {
 						status: "done"
-					}
+					},
+					include: [
+						{
+							model: models.order
+						}, {
+							model: models.complaint
+						}, {
+							model: models.internal_order
+						}, {
+							model: models.customer
+						}
+					]
 				}
 			]
 		})

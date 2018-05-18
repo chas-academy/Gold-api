@@ -22,7 +22,6 @@ export default app => {
 
     //<--users specific rroutes on status-->
     app.get('/employee/:id/assigned',C.Users.findAssigned)
-    app.get('/employee/:id/assignedInt',C.Users.findAssignedInt)
     app.get('/employee/:id/done',C.Users.findDone)
 
     //<--services routes-->

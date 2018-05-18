@@ -126,6 +126,8 @@ module.exports = {
                 datetime: new Date(fields.date + "T" + fields.time),
                 order: {
                     address: fields.address,
+                    lat: fields.lat,
+                    lon: fields.lon,
                     description: fields.description,
                     image_path: image_paths
                 }

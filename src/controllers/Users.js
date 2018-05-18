@@ -217,37 +217,6 @@ module.exports = {
 						}, {
 							model: models.complaint
 						}, {
-							model: models.customer
-						}
-					]
-				}
-			]
-		})
-        .then(function (user) {
-            res.status(200).json(user)
-        })
-        .catch(function (error) {
-            res.status(500).json({ error: "Kan inte hitta ärende" })
-        })
-    },
-
-    /* FIND ASSIGNED int_orders */
-
-    findAssignedInt(req, res) {
-        User.findById(req.params.id, {
-			attributes: {
-				exclude: ['password']
-			},
-			include: [
-				{
-					model: models.service,
-					as: "services",
-					where: {
-						order_type: "int_order",
-						status: "assigned"
-					},
-					include: [
-						{
 							model: models.internal_order
 						}, {
 							model: models.customer
@@ -260,7 +229,7 @@ module.exports = {
             res.status(200).json(user)
         })
         .catch(function (error) {
-            res.status(500).json({ error: "Kan inte hitta interna beställningar" })
+            res.status(500).json({ error: "Kan inte hitta ärende" })
         })
     },
 

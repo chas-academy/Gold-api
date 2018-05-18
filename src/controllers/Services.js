@@ -7,8 +7,7 @@ module.exports = {
 		Service.findAll({
 			include: [
 				{
-					model: models.internal_order,
-					as: "int_orders"
+					model: models.internal_order
 				}, {
 					model: models.order
 				}, {
@@ -174,8 +173,9 @@ module.exports = {
 	},
 	// Handle a service and assign someone to it
 	serviceHandle(req, res) {
-		var ServiceType = function () {
-			switch (req.params.type) {
+		let isError = false
+		var ServiceType = function (type) {
+			switch (type) {
 				case "order":
 					return models.order
 					break
@@ -186,7 +186,7 @@ module.exports = {
 					return models.internal_order
 					break
 			}
-		}
+		}(req.params.type)
 		let hours = req.body.time.split(":")[0]
         if (hours < 10 && hours.length < 2) {
             req.body.time = "0" + req.body.time
@@ -211,20 +211,18 @@ module.exports = {
 							})
 						}
 						catch(error) {
-							Service.destroy({
-								where: {
-									id: req.params.id
-								}
+							res.status(500).json({ error: "Kan inte assigna anställda" })
+							isError = true
+							Service.update({
+								status: "new"
 							})
-							throw new error('Kan inte assigna anställda')
+							throw error
 						}
                         res.status(200).json({ message: "Ärende blev hanterad" })
                     })
                     .catch(function (error) {
-						if (error.message) {
-							res.status(500).json({ error: error.message })
-						} else {
-							res.status(500).json({ error: "Kan inte uppdatera " + req.params.type + " ärende" })
+						if (!isError) {
+							res.status(500).json({ error: "Kan inte uppdatera " + req.params.type + " ärende" });
 						}
                     })
                 })
@@ -233,7 +231,7 @@ module.exports = {
                 })
             })
             .catch(function (error) {
-                res.status(500).json({ error: "Kan inte uppdatera ärende" })
+                res.status(500).json({ error: "Kan inte uppdatera ärende", wtf: ServiceType, wtf2: req.params.type })
             })
 		})
 		.catch(function (error) {

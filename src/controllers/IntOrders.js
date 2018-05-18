@@ -103,7 +103,7 @@ module.exports = {
             try {
                 req.body.employees.forEach(employee => {
                     models.employee_service.create({
-                        userId: employeeasd,
+                        userId: employee,
                         serviceId: int_order.id
                     })
                 })

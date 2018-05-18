@@ -215,7 +215,12 @@ module.exports = {
 						{
 							model: models.order
 						}, {
-							model: models.complaint
+							model: models.complaint,
+							include: [
+								{
+									model: models.order
+								}
+							]
 						}, {
 							model: models.internal_order
 						}, {

@@ -100,7 +100,7 @@ module.exports = {
         form.parse(req, (err, pFields, pFiles) => {
             if (err) res.status(500).json({ error: err })
             files.forEach((image, i) => {
-                fs.rename(image.path, 'src/images/order_img/' + image.name, function (error) {
+                fs.rename(image.path, 'src/images/customer/order_img/' + image.name, function (error) {
                     if (error) {
                         console.log(error)
                     }
@@ -152,6 +152,7 @@ module.exports = {
         Service.findById(req.params.id).then(function (Service) {
             Service.update({
                 order_type: "order",
+                company_name: req.body.company_name,
                 con_pers: req.body.con_pers,
                 con_tel: req.body.con_tel,
                 datetime: new Date(req.body.date + "T" + req.body.time),
@@ -160,6 +161,8 @@ module.exports = {
                 Order.findById(req.params.id).then(function (Order) {
                     Order.update({
                         address: req.body.address,
+                        lat: req.body.lat,
+                        lon: req.body.lon,
                         description: req.body.description,
                         image_path: req.body.image_path
                     })

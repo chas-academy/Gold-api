@@ -258,7 +258,7 @@ module.exports = {
 		})
 	},
 	getImagesOrderCustomer(req, res) {
-		res.sendFile(path.resolve('src/images/order_img/customer/' + req.params.img))
+		res.json({ path: path.resolve('src/images/order_img/customer/' + req.params.img) })
 	},
 	getImagesOrderEmployee(req, res) {
 		res.sendFile(path.resolve('src/images/order_img/employee/' + req.params.img))

@@ -1,6 +1,7 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var cors = require('cors')
+var morgan = require('morgan')
 
 
 const app = express()
@@ -11,6 +12,7 @@ const jsonwebtoken = require('jsonwebtoken');
 
 models.sequelize.sync({ logging: false }) // sync to help unique validations
 
+app.use(morgan('dev'))
 app.use(cors())
 app.options('*', cors())
 app.use(bodyParser.json())

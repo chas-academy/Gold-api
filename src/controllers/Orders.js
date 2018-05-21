@@ -2,6 +2,7 @@ var models = require('../models');
 var Order = require('../models').order;
 var Service = require('../models').service;
 var fs = require('fs')
+var path = require('path')
 var formidable = require('formidable')
 
 module.exports = {
@@ -11,7 +12,13 @@ module.exports = {
         Order.findAll({
             include: [
                 {
-                    model: models.service
+                    model: models.service,
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }, {
                     model: models.complaint
                 }
@@ -29,7 +36,13 @@ module.exports = {
         Order.findById(req.params.id, {
             include: [
                 {
-                    model: models.service
+                    model: models.service,
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }, {
                     model: models.complaint,
                     as: "complaints"
@@ -52,7 +65,13 @@ module.exports = {
                     where: {
                         order_type: "order",
                         status: "assigned"
-                    }
+                    },
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }
             ]
         })
@@ -72,7 +91,13 @@ module.exports = {
                     where: {
                         order_type: "order",
                         status: "done"
-                    }
+                    },
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }
             ]
         })
@@ -101,8 +126,8 @@ module.exports = {
         form.parse(req, (err, pFields, pFiles) => {
             if (err) res.status(500).json({ error: err })
             files.forEach((image, i) => {
-                fs.rename(image.path, 'src/images/order_img/customer/' + image.name, function (error) {
-                    image_paths.push('https://gold-api-dev.chas.school/src/images/order_img/customer/' + image.name)
+                fs.rename(path.resolve(image.path), path.resolve(__dirname + '../../images/order_img/customer/' + image.name), function (error) {
+                    image_paths.push(path.resolve(__dirname + '../../images/order_img/customer/' + image.name))
                     if (error) {
                         console.log(error)
                     }

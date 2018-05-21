@@ -9,7 +9,13 @@ module.exports = {
         intOrder.findAll({
             include: [
                 {
-                    model: models.service
+                    model: models.service,
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }
             ]
         })
@@ -25,7 +31,13 @@ module.exports = {
         intOrder.findById(req.params.id, {
             include: [
                 {
-                    model: models.service
+                    model: models.service,
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }
             ]
         })
@@ -45,7 +57,13 @@ module.exports = {
                     where: {
                         order_type: "int_order",
                         status: "assigned"
-                    }
+                    },
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }
             ]
         })
@@ -65,7 +83,13 @@ module.exports = {
                     where: {
                         order_type: "int_order",
                         status: "done"
-                    }
+                    },
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }
             ]
         })

@@ -9,7 +9,13 @@ module.exports = {
         Complaint.findAll({
             include: [
                 {
-                    model: models.service
+                    model: models.service,
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }, {
                     model: models.order
                 }
@@ -27,7 +33,13 @@ module.exports = {
         Complaint.findById(req.params.id, {
             include: [
                 {
-                    model: models.service
+                    model: models.service,
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }, {
                     model: models.order
                 }
@@ -49,7 +61,13 @@ module.exports = {
                     where: {
                         order_type: "complaint",
                         status: "assigned"
-                    }
+                    },
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }, {
                     model: models.order
                 }
@@ -71,7 +89,13 @@ module.exports = {
                     where: {
                         order_type: "complaint",
                         status: "done"
-                    }
+                    },
+                    include: [
+                        {
+                            model: models.user,
+                            as: "employees"
+                        }
+                    ]
                 }, {
                     model: models.order
                 }

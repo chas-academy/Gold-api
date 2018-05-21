@@ -18,6 +18,9 @@ module.exports = {
 							model: models.order
 						}
 					]
+				}, {
+					model: models.user,
+					as: "employees"
 				}
 			]
 		})
@@ -42,6 +45,9 @@ module.exports = {
 							model: models.order
 						}
 					]
+				}, {
+					model: models.user,
+					as: "employees"
 				}
 			]
 		})
@@ -134,6 +140,9 @@ module.exports = {
 							model: models.order
 						}
 					]
+				}, {
+					model: models.user,
+					as: "employees"
 				}
 			]
 		})
@@ -162,6 +171,9 @@ module.exports = {
 							model: models.order
 						}
 					]
+				}, {
+					model: models.user,
+					as: "employees"
 				}
 			]
 		})
@@ -258,22 +270,22 @@ module.exports = {
 		})
 	},
 	getImagesOrderCustomer(req, res) {
-		res.sendFile(path.resolve(__dirname + '../../../src/images/order_img/customer/' + req.params.img))
+		res.sendFile(path.resolve(__dirname + '../../images/order_img/customer/' + req.params.img))
 	},
 	getImagesOrderEmployee(req, res) {
-		res.sendFile(path.resolve(__dirname + '../../../src/images/order_img/employee/' + req.params.img))
+		res.sendFile(path.resolve(__dirname + '../../images/order_img/employee/' + req.params.img))
 	},
 	getImagesOrderIntCustomer(req, res) {
-		res.sendFile(path.resolve(__dirname + '../../../src/images/int_order_img/customer/' + req.params.img))
+		res.sendFile(path.resolve(__dirname + '../../images/int_order_img/customer/' + req.params.img))
 	},
 	getImagesOrderIntEmployee(req, res) {
-		res.sendFile(path.resolve(__dirname + '../../../src/images/int_order_img/employee/' + req.params.img))
+		res.sendFile(path.resolve(__dirname + '../../images/int_order_img/employee/' + req.params.img))
 	},
 	getImagesComplaintCustomer(req, res) {
-		res.sendFile(path.resolve(__dirname + '../../../src/images/complaint_img/customer/' + req.params.img))
+		res.sendFile(path.resolve(__dirname + '../../images/complaint_img/customer/' + req.params.img))
 	},
 	getImagesComplaintEmployee(req, res) {
-		res.sendFile(path.resolve(__dirname + '../../../src/images/complaint_img/employee/' + req.params.img))
+		res.sendFile(path.resolve(__dirname + '../../images/complaint_img/employee/' + req.params.img))
 	}
 
 

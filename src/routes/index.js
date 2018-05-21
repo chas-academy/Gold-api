@@ -24,7 +24,16 @@ export default app => {
     app.get('/employee/:id/assigned',C.Users.findAssigned)
     app.get('/employee/:id/done',C.Users.findDone)
 
+    //<--image routs-->
+    app.get('/src/images/order_img/customer/:img', C.Services.getImagesOrderCustomer)
+    app.get('/src/images/order_img/employee/:img', C.Services.getImagesOrderEmployee)
+    app.get('/src/images/int_order_img/customer/:img', C.Services.getImagesOrderIntCustomer)
+    app.get('/src/images/int_order_img/employee/:img', C.Services.getImagesOrderIntEmployee)
+    app.get('/src/images/complaint_img/customer/:img', C.Services.getImagesComplaintCustomer)
+    app.get('/src/images/complaint_img/employee/:img', C.Services.getImagesComplaintEmployee)
+
     //<--services routes-->
+    app.put('/services/:id/complete', C.Auth.loginRequired, C.Services.serviceComplete)
     app.put('/services/:id/:type/handle', C.Auth.loginRequired, C.Services.serviceHandle)
     app.get('/customer/:id/services', C.Auth.loginRequired, C.Services.findByCustomer)
     app.get('/services/new', C.Auth.loginRequired, C.Services.showNew)

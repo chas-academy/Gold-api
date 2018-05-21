@@ -1,5 +1,6 @@
 var models = require('../models');
 var Service = require('../models').service;
+var path = require('path');
 
 module.exports = {
 	//Get a list of services using model.findAll()
@@ -231,12 +232,49 @@ module.exports = {
                 })
             })
             .catch(function (error) {
-                res.status(500).json({ error: "Kan inte uppdatera ärende", wtf: ServiceType, wtf2: req.params.type })
+                res.status(500).json({ error: "Kan inte uppdatera ärende" })
             })
 		})
 		.catch(function (error) {
 			res.status(500).json({ error: "Kan inte hitta ärende" })
 		})
+	},
+	// an employee completing the order
+	serviceComplete(req, res) {
+		Service.findById(req.params.id)
+		.then(function (Service) {
+			Service.update({
+				status: "done"
+			})
+			.then(function () {
+				res.status(200).json({ message: "Ärende slutförades" })
+			})
+			.catch(function (error) {
+				res.status(500).json({ error: "Kan inte uppdatera ärende" })
+			})
+		})
+		.catch(function (error) {
+			res.status(500).json({ error: "Kan inte hitta ärende" })
+		})
+	},
+	getImagesOrderCustomer(req, res) {
+		res.sendFile(path.resolve('src/images/order_img/customer/' + req.params.img))
+	},
+	getImagesOrderEmployee(req, res) {
+		res.sendFile(path.resolve('src/images/order_img/employee/' + req.params.img))
+	},
+	getImagesOrderIntCustomer(req, res) {
+		res.sendFile(path.resolve('src/images/int_order_img/customer/' + req.params.img))
+	},
+	getImagesOrderIntEmployee(req, res) {
+		res.sendFile(path.resolve('src/images/int_order_img/employee/' + req.params.img))
+	},
+	getImagesComplaintCustomer(req, res) {
+		res.sendFile(path.resolve('src/images/complaint_img/customer/' + req.params.img))
+	},
+	getImagesComplaintEmployee(req, res) {
+		res.sendFile(path.resolve('src/images/complaint_img/employee/' + req.params.img))
 	}
+
 
 }

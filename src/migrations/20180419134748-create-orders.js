@@ -16,6 +16,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
+      lat: {
+        allowNull: false,
+        type: Sequelize.DOUBLE
+      },
+      lon: {
+        allowNull: false,
+        type: Sequelize.DOUBLE
+      },
       description: {
         allowNull: false,
         type: Sequelize.TEXT

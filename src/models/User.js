@@ -20,7 +20,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     },
-    pers_org_num: {
+    email: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      unique: true,
+      validate: {
+        isEmail: true
+      }
+    },
+    tel: {
       allowNull: false,
       type: DataTypes.STRING,
       unique: true

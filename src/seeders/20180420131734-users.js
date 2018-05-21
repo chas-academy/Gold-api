@@ -4,42 +4,50 @@ module.exports = {
       return queryInterface.bulkInsert('users', [{
         type: 'admin',
         name: 'Admin',
-        pers_org_num: '9901019876',
+        email: 'admin.admin@email.com',
+        tel: '0700123456',
         password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         type: 'employee',
         name: 'Erica',
-        pers_org_num: '9901019877',
+        email: 'emp.erica@email.com',
+        tel: '',
         password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         type: 'employee',
         name: 'Sven',
-        pers_org_num: '9901019878',
+        email: 'emp.sven@email.com',
+        tel: '0734154612',
         password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         type: 'employee',
         name: 'Abdi',
-        pers_org_num: '9901019879',
+        email: 'emp.abdi@email.com',
+        tel: '0701233454',
         password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         type: 'customer',
         name: 'Sven Svensson',
-        pers_org_num: '9901019870',
+        email: 'cmr.sven@email.com',
+        tel: '0737223452',
         password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         type: 'customer',
         name: 'Bob Johnson',
-        pers_org_num: '9901019875',
+        email: 'cmr.bob@email.com',
+        tel: '0730987634',
         password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         type: 'customer',
         name: 'Mäklarringen',
-        pers_org_num: '9901019874',
+        email: 'cmr.maklarringen@email.com',
+        tel: '08246812',
         password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }, {
         type: 'customer',
         name: 'Hidden Company',
-        pers_org_num: '9901019873',
+        email: 'cmr.company@email.com',
+        tel: '08246843',
         password: '$2a$10$30EGSWnvXYuaucQvZXzvnO1xXjYEoajbCz8.p.qBNFT/S5Vm1HWQK' // qwerty
       }], {});
   },

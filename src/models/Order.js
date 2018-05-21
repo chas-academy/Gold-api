@@ -11,6 +11,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.TEXT
     },
+    lat: {
+      allowNull: false,
+      type: DataTypes.DOUBLE
+    },
+    lon: {
+      allowNull: false,
+      type: DataTypes.DOUBLE
+    },
     description: {
       allowNull: false,
       type: DataTypes.TEXT

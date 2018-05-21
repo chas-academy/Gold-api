@@ -100,7 +100,7 @@ module.exports = {
         form.parse(req, (err, pFields, pFiles) => {
             if (err) res.status(500).json({ error: err })
             files.forEach((image, i) => {
-                fs.rename(image.path, 'src/images/customer/order_img/' + image.name, function (error) {
+                fs.rename(image.path, 'src/images/order_img/customer/' + image.name, function (error) {
                     if (error) {
                         console.log(error)
                     }

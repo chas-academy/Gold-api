@@ -21,6 +21,7 @@ WORKDIR /app
 
 COPY --from=builder /node_modules /node_modules
 COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app/src/images /app/dist/images
 COPY --from=builder /app/.env /app/.env
 COPY --from=builder /app/.sequelizerc.prod /app/.sequelizerc
 

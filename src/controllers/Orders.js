@@ -102,7 +102,7 @@ module.exports = {
             if (err) res.status(500).json({ error: err })
             files.forEach((image, i) => {
                 fs.rename(image.path, 'src/images/order_img/customer/' + image.name, function (error) {
-                    image_paths.push('src/images/order_img/customer/' + image.name)
+                    image_paths.push('https://gold-api-dev.chas.school/src/images/order_img/customer/' + image.name)
                     if (error) {
                         console.log(error)
                     }

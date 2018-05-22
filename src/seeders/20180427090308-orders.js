@@ -4,51 +4,51 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
       return queryInterface.bulkInsert('orders', [{
         service_id: 1,
-        address: 'Drottninggatan 14',
-        lat: 59.3298085,
-        lon: 18.0633878,
+        address: 'Regementsgatan 52',
+        lat: 55.5982742,
+        lon: 12.9826941,
         description: 'Description of a general order. Do that, that and some of this.',
         image_path: ['src/images/order_img/customer/15258733491031.jpg']
       }, {
         service_id: 2,
-        address: 'Solursgränd 2',
-        lat: 59.3627103,
-        lon: 17.8738748,
+        address: 'Regementsgatan 94',
+        lat: 55.5978482,
+        lon: 12.9745356,
         description: 'Description of a general order. Do that, that and some of this.',
         image_path: ['src/images/order_img/customer/15258733491032.jpg']
       }, {
         service_id: 3,
-        address: 'Elektravägen 29',
-        lat: 59.2950814,
-        lon: 18.0088671,
+        address: 'Sergels väg 11',
+        lat: 55.602275,
+        lon: 12.9736223,
         description: 'Description of a general order. Do that, that and some of this.',
         image_path: ['src/images/order_img/customer/15258733491033.jpg']
       }, {
         service_id: 4,
-        address: 'Grinstagatan 49',
-        lat: 59.3583324,
-        lon: 17.8692312,
+        address: 'Einar Hansens Esplanad 37',
+        lat: 55.6134363,
+        lon: 12.9773816,
         description: 'Description of a general order. Do that, that and some of this.',
         image_path: ['src/images/order_img/customer/15258733491034.jpg']
       }, {
         service_id: 5,
-        address: 'Elektravägen 29',
-        lat: 59.2950814,
-        lon: 18.0088671,
+        address: 'Per Albin Hanssons väg 40',
+        lat: 55.5867358,
+        lon: 12.9739843,
         description: 'Description of a general order. Do that, that and some of this.',
         image_path: ['src/images/order_img/customer/15258733491035.jpg']
       }, {
         service_id: 6,
-        address: 'Drottninggatan 14',
-        lat: 59.3298085,
-        lon: 18.0633878,
+        address: 'Bennets väg 2',
+        lat: 55.5890235,
+        lon: 13.0271594,
         description: 'Description of a general order. Do that, that and some of this.',
         image_path: ['src/images/order_img/customer/15258733491036.jpeg']
       }, {
         service_id: 7,
-        address: 'Solursgränd 2',
-        lat: 59.3627103,
-        lon: 17.8738748,
+        address: 'Celsiusgatan 40',
+        lat: 55.5993789,
+        lon: 13.0350059,
         description: 'Description of a general order. Do that, that and some of this.',
         image_path: ['src/images/order_img/customer/15258733491037.jpg']
       }], {});

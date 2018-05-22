@@ -5,27 +5,27 @@ module.exports = {
     return queryInterface.bulkInsert('customers', [{
       user_id: '5',
       type: 'private',
-      address: 'Drottninggatan 14',
-      lat: 59.3298085,
-      lon: 18.0633878
+      address: 'Regementsgatan 52',
+      lat: 55.5982742,
+      lon: 12.9826941
     }, {
       user_id: '6',
       type: 'private',
-      address: 'Grinstagatan 49',
-      lat: 59.3583324,
-      lon: 17.8692312
+      address: 'Regementsgatan 94',
+      lat: 55.5978482,
+      lon: 12.9745356
     }, {
       user_id: '7',
       type: 'company',
-      address: 'Elektravägen 29',
-      lat: 59.2950814,
-      lon: 18.0088671
+      address: 'Sergels väg 11',
+      lat: 55.602275,
+      lon: 12.9736223
     }, {
       user_id: '8',
       type: 'company',
-      address: 'Solursgränd 2',
-      lat: 59.3627103,
-      lon: 17.8738748
+      address: 'Einar Hansens Esplanad 37',
+      lat: 55.6134363,
+      lon: 12.9773816
     }], {});
   },
 

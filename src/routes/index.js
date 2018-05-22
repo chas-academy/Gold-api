@@ -34,7 +34,7 @@ export default app => {
 
     //<--services routes-->
     app.put('/services/:id/complete', C.Auth.loginRequired, C.Services.serviceComplete)
-    app.put('/services/:id/:type/handle', C.Auth.loginRequired, C.Services.serviceHandle)
+    app.put('/services/:id/handle', C.Auth.loginRequired, C.Services.serviceHandle)
     app.get('/customer/:id/services', C.Auth.loginRequired, C.Services.findByCustomer)
     app.get('/services/new', C.Auth.loginRequired, C.Services.showNew)
     app.get('/services/assigned', C.Auth.loginRequired, C.Services.showAssigned)

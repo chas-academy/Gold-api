@@ -186,20 +186,8 @@ module.exports = {
 	},
 	// Handle a service and assign someone to it
 	serviceHandle(req, res) {
+		console.log(req.body.time)
 		let isError = false
-		var ServiceType = function (type) {
-			switch (type) {
-				case "order":
-					return models.order
-					break
-				case "complaint":
-					return models.complaint
-					break
-				case "int_order":
-					return models.internal_order
-					break
-			}
-		}(req.params.type)
 		let hours = req.body.time.split(":")[0]
         if (hours < 10 && hours.length < 2) {
             req.body.time = "0" + req.body.time
@@ -210,6 +198,19 @@ module.exports = {
 				status: "assigned"
             })
             .then(function () {
+				var ServiceType = function (type) {
+					switch (Service.order_type) {
+						case "order":
+							return models.order
+							break
+						case "complaint":
+							return models.complaint
+							break
+						case "int_order":
+							return models.internal_order
+							break
+					}
+				}(req.params.type)
                 ServiceType.findById(req.params.id).then(function (ServiceType) {
                     ServiceType.update({
                         description: req.body.description
@@ -231,16 +232,16 @@ module.exports = {
 							})
 							throw error
 						}
-                        res.status(200).json({ message: "Ärende blev hanterad" })
+                        res.status(200).json({ message: "Ärende uppdaterades" })
                     })
                     .catch(function (error) {
 						if (!isError) {
-							res.status(500).json({ error: "Kan inte uppdatera " + req.params.type + " ärende" });
+							res.status(500).json({ error: "Kan inte uppdatera ärende" });
 						}
                     })
                 })
                 .catch(function (error) {
-                    res.status(500).json({ error: "Kan inte hitta " + req.params.type + " ärende" })
+                    res.status(500).json({ error: "Kan inte hitta ärende" })
                 })
             })
             .catch(function (error) {

@@ -16,7 +16,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }, {
@@ -40,7 +43,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }, {
@@ -69,7 +75,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }
@@ -95,7 +104,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }
@@ -138,14 +150,13 @@ module.exports = {
             if (hours < 10 && hours.length < 2) {
                 fields.time = "0" + fields.time
             }
-
             Service.create({
                 client_id: fields.client_id,
                 order_type: "order",
                 company_name: fields.company_name,
                 con_pers: fields.con_pers,
                 con_tel: fields.con_tel,
-                datetime: new Date(fields.date + "T" + fields.time),
+                datetime: new Date(fields.date + "T" + fields.time + "+02:00"),
                 order: {
                     address: fields.address,
                     lat: fields.lat,

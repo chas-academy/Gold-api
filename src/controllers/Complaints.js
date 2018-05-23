@@ -13,7 +13,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }, {
@@ -37,7 +40,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }, {
@@ -65,7 +71,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }, {
@@ -93,7 +102,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }, {
@@ -110,27 +122,47 @@ module.exports = {
     },
     //Create complaints
     create(req, res) {
-        let hours = req.body.time.split(":")[0]
-        if (hours < 10 && hours.length < 2) {
-            req.body.time = "0" + req.body.time
-        }
-        Service.create({
-            order_type: "complaint",
-            datetime: new Date(req.body.date + "T" + req.body.time),
-            complaint: {
-                order_id: req.body.order_id,
-                description: req.body.description,
-                image_path: req.body.image_path
-            }
-        }, {
-            include: [models.complaint]
+        Service.findById(req.body.order_id, {
+            include: [
+                {
+                    model: models.order
+                }
+            ]
         })
-        .then(function (complaint) {
-            res.status(200).json({ message: "Reklamation skapades" });
+        .then(function (Order) {
+            if (Order.order_type == "order") {
+                let hours = req.body.time.split(":")[0]
+                if (hours < 10 && hours.length < 2) {
+                    req.body.time = "0" + req.body.time
+                }
+                Service.create({
+                    client_id: Order.client_id,
+                    order_type: "complaint",
+                    company_name: Order.company_name,
+                    con_pers: Order.con_pers,
+                    con_tel: Order.con_tel,
+                    datetime: new Date(req.body.date + "T" + req.body.time),
+                    complaint: {
+                        order_id: req.body.order_id,
+                        description: req.body.description,
+                        image_path: req.body.image_path
+                    }
+                }, {
+                    include: [models.complaint]
+                })
+                .then(function (complaint) {
+                    res.status(200).json({ message: "Reklamation skapades" });
+                })
+                .catch(function (error) {
+                    res.status(500).json({ error: "Kan inte skapa reklamation" });
+                })
+            } else {
+                res.status(500).json({ error: "Felaktigt ärende ID" })
+            }
         })
         .catch(function (error) {
-            res.status(500).json({ error: "Kan inte skapa reklamation" });
-        });
+            res.status(500).json({ error: "Kan inte hitta ärende" })
+        })
     },
     //Update complaints
     update(req, res) {

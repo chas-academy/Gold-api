@@ -13,7 +13,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }
@@ -35,7 +38,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }
@@ -61,7 +67,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }
@@ -87,7 +96,10 @@ module.exports = {
                     include: [
                         {
                             model: models.user,
-                            as: "employees"
+                            as: "employees",
+                            attributes: {
+                                exclude: ['password']
+                            }
                         }
                     ]
                 }

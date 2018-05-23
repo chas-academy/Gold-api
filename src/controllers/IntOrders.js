@@ -121,7 +121,7 @@ module.exports = {
         }
         Service.create({
             order_type: "int_order",
-            datetime: new Date(req.body.date + "T" + req.body.time),
+            datetime: new Date(req.body.date + "T" + req.body.time + "+02:00"),
             con_pers: req.body.con_pers,
             con_tel: req.body.con_tel,
             status: "assigned",
@@ -173,7 +173,7 @@ module.exports = {
                 order_type: "int_order",
                 con_pers: req.body.con_pers,
                 con_tel: req.body.con_tel,
-                datetime: new Date(req.body.date + "T" + req.body.time)
+                datetime: new Date(req.body.date + "T" + req.body.time + "+02:00")
             })
             .then(function () {
                 intOrder.findById(req.params.id).then(function (intOrder) {

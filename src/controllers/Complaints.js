@@ -141,7 +141,7 @@ module.exports = {
                     company_name: Order.company_name,
                     con_pers: Order.con_pers,
                     con_tel: Order.con_tel,
-                    datetime: new Date(req.body.date + "T" + req.body.time),
+                    datetime: new Date(req.body.date + "T" + req.body.time + "+02:00"),
                     complaint: {
                         order_id: req.body.order_id,
                         description: req.body.description,
@@ -175,7 +175,7 @@ module.exports = {
                 order_type: "complaint",
                 con_pers: req.body.con_pers,
                 con_tel: req.body.con_tel,
-                datetime: new Date(req.body.date + "T" + req.body.time),
+                datetime: new Date(req.body.date + "T" + req.body.time + "+02:00"),
             })
             .then(function () {
                 Complaint.findById(req.params.id).then(function (Complaint) {

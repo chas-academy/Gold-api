@@ -188,7 +188,7 @@ module.exports = {
                 company_name: req.body.company_name,
                 con_pers: req.body.con_pers,
                 con_tel: req.body.con_tel,
-                datetime: new Date(req.body.date + "T" + req.body.time),
+                datetime: new Date(req.body.date + "T" + req.body.time + "+02:00"),
             })
             .then(function () {
                 Order.findById(req.params.id).then(function (Order) {

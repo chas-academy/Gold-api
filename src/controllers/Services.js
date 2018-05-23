@@ -218,7 +218,7 @@ module.exports = {
         }
 		Service.findById(req.params.id).then(function (Service) {
 			Service.update({
-				datetime: new Date(req.body.date + "T" + req.body.time),
+				datetime: new Date(req.body.date + "T" + req.body.time + "+02:00"),
 				status: "assigned"
             })
             .then(function () {

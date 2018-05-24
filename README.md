@@ -1,6 +1,6 @@
 # Gold API
 
-###### API part of Service Management System project. Making easier to make and manage services.
+### API part of Service Management System project. Making easier to make and manage services.
 
 Table of contents
 =================

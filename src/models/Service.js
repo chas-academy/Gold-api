@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       values: ["order", "int_order", "complaint"],
       type: DataTypes.ENUM
     },
+    company_name: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
     con_pers: {
       allowNull: true,
       type: DataTypes.STRING
@@ -58,15 +62,13 @@ module.exports = (sequelize, DataTypes) => {
       hooks: true
     });
 
-    Service.hasMany(models.complaint, {
-      as: 'complaints',
+    Service.hasOne(models.complaint, {
       foreignKey: "service_id",
       onDelete: 'CASCADE',
       hooks: true
     });
 
-    Service.hasMany(models.internal_order, {
-      as: 'int_orders',
+    Service.hasOne(models.internal_order, {
       foreignKey: "service_id",
       onDelete: 'CASCADE',
       hooks: true

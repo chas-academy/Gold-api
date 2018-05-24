@@ -7,13 +7,25 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: false,
       type: DataTypes.INTEGER
     },
+    address: {
+      allowNull: true,
+      type: DataTypes.TEXT
+    },
+    lat: {
+      allowNull: true,
+      type: DataTypes.DOUBLE
+    },
+    lon: {
+      allowNull: true,
+      type: DataTypes.DOUBLE
+    },
     description: {
       allowNull: false,
       type: DataTypes.TEXT
     },
     image_path: {
       allowNull: true,
-      type: DataTypes.STRING
+      type: DataTypes.ARRAY(DataTypes.STRING)
     }
   }, {
       timestamps: false

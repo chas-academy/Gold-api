@@ -12,12 +12,25 @@ module.exports = {
           key: "id"
         }
       },
+      address: {
+        allowNull: true,
+        type: Sequelize.TEXT
+      },
+      lat: {
+        allowNull: true,
+        type: Sequelize.DOUBLE
+      },
+      lon: {
+        allowNull: true,
+        type: Sequelize.DOUBLE
+      },
       description: {
         allowNull: false,
         type: Sequelize.TEXT
       },
       image_path: {
-        type: Sequelize.STRING(50)
+        allowNull: true,
+        type: Sequelize.ARRAY(Sequelize.STRING)
       }
     });
   },

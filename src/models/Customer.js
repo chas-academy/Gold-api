@@ -15,30 +15,17 @@ module.exports = (sequelize, DataTypes) => {
         "company"
       ]
     },
-    email: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      unique: true,
-      validate: {
-        isEmail: true
-      }
-    },
-    tel: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      unique: true
-    },
     address: {
       allowNull: false,
       type: DataTypes.TEXT
     },
     lat: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     lon: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     }
   }, {
     timestamps: false

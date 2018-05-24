@@ -1,5 +1,6 @@
-# API Boilerplate
-This is the API boilerplate which will get you started. For any questions regarding the stack, please use our [#help](https://chasacademy.slack.com/messages/C61J8A678/#help) channel in Slack.
+# Gold API
+
+###### API part of Service Management System project. Making easier to make and manage services.
 
 Table of contents
 =================
@@ -12,26 +13,34 @@ Table of contents
       * [Bash Commands](#bash-commands)
       * [Database](#database)
       * [Users](#users)
+      * [Deployment](#buddyworks)
+      * [Built With](#builtwith)
 <!--te-->
 
 ## Directory Layout
 ```bash
 ./
-├── /src                    # Directory for the api code, a standard express app using Postgres as database
+|                           # Directory for the api code, a standard express app using Postgres as database
+├── /deploy                 # Deploy Configuration
+│   ├── .env.prod           #
+│   ├── docker-stack-production.yml
+│   ├── Dockerfile.prod     #
+├── /src                    #
 │   ├── /config/            #
-│   ├── /controllers/       #
-│   ├── /helpers/           #
-│   ├── /lib/               #
-│   ├── /migrations/        #
-│   ├── /models/            #
-│   ├── /routes/            #
-│   ├── /seeders/           #
-│   └── server.js           #
+|   |   ├── database.js     # Postgresql db connections and configurations
+|   |                       #
+│   ├── /controllers/       # Sequelize controllers 
+│   ├── /images/            # Images will be stored here
+│   ├── /migrations/        # Sequelize migrations 
+│   ├── /models/            # Sequelize models for database
+│   ├── /routes/            # Express routes for backend 
+│   ├── /seeders/           # Database seeders
+│   ├── server.js           # Express server listening localhost or deployed url with port 7770
 ├── .env                    # Defines environment variables for the project
 ├── .sequelizerc            # Defines default configuration for a database helper tool called Sequelize
 ├── docker-compose.yml      # Defines Docker services, networks and volumes, do not touch unless you know what you are doing
 ├── Dockerfile              # Defines how Docker should build a custom image for the application, do not touch unless you know what you are doing
-└── README.md               # The file you are reading right now
+└── README.md               # The file you are reading right now with info about the API
 ```
 
 ## Quickstart
@@ -144,12 +153,36 @@ To manage separate Docker instance for API, open another terminal console and ru
 
 Use the following credentials to test different API responses. Default password for all accounts is `password`.
 
-| Name              | Email                  | Description |
-|-------------------|------------------------|-------------|
-| Super Admin User  | `superadmin@email.com` | Has wildcard access |
-| Admin User        | `admin@email.com`      | Has wildcard access but `Admin › Users › Delete` is excluded |
-| Common User       | `user@email.com`       | Can access `My Profile`, `Admin › Dashboard`, `Users`, `Users › View, and Settings` |
-| Referrer User     | `referrer@email.com`   | When `redirect` is set without the domain, e.i. `/admin/dashboard`, user shall be redirected to internal page if no location path (referrer) found on the Sign In page |
-| Redirect User     | `redirect@email.com`   | When `redirect` is set with complete URL, e.i. `https://github.com/anthub-services`, user shall be redirected to external page if no location path (referrer) found on the Sign In page |
-| Blocked User      | `blocked@email.com`    | User is signed in but the account is blocked |
-| Unauthorized User | `<any invalid email>`  | Simply enter wrong `email` and/or `password` |
+| Name              | Email                  | Description                                                                           |
+|-------------------|------------------------|---------------------------------------------------------------------------------------|
+| Admin User        | `admin.admin@email.com`| Has wildcard access                                                                   |
+| Customer User     | `customer@email.com`   | Can access `My Profile`, Can create `Order and Complaint`, Can change `Profile info`  |
+| Employee User     | `employee@email.com`   | Can access `My Profile`, `Service history`, Can end `Order, Complaint, Internal order`|
+|------------------------------------------------------------------------------------------------------------------------------------|
+
+## Deployment
+
+  Project is deployed with [Buddyworks](https://buddy.works/) and [DigitalOcean](https://www.digitalocean.com/). 
+    Link to deployed versions
+      Client - https://gold-dev.chas.school/
+      API - https://gold-api-dev.chas.school/
+  
+## Built With 
+ 
+  [Node.js](https://nodejs.org/en/) Server side
+ 
+  [Express](http://expressjs.com/) Server side
+ 
+  [Postgresql](https://www.postgresql.org/) Database
+ 
+  [Sequelize](http://docs.sequelizejs.com/) Promise-based ORM
+ 
+## Authors 
+  
+  * Alex Grace
+  * Eleni Nikou
+  * Oleg Lopes
+  * Patryk Rybaczek
+  * Zaven Hambardzumyan
+  
+

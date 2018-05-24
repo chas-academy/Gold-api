@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 var models = require('../models');
 var User = require('../models').user;
 var Customer = require('../models').customer;
@@ -206,9 +205,6 @@ module.exports = {
 					model: models.service,
 					as: "services",
 					where: {
-						order_type: {
-							[Op.not]: "int_order"
-						},
 						status: "assigned"
 					},
 					include: [

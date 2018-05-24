@@ -130,7 +130,8 @@ module.exports = {
             ]
         })
         .then(function (Order) {
-            if (Order.order_type == "order") {
+            if ((Order.order_type == "order" && Order.client_id == req.body.client_id && Order.status == "done")
+            || (Order.order_type == "order" && req.body.is_admin && Order.status == "done")) {
                 let hours = req.body.time.split(":")[0]
                 if (hours < 10 && hours.length < 2) {
                     req.body.time = "0" + req.body.time
@@ -157,7 +158,7 @@ module.exports = {
                     res.status(500).json({ error: "Kan inte skapa reklamation" });
                 })
             } else {
-                res.status(500).json({ error: "Felaktigt ärende ID" })
+                res.status(500).json({ error: "Felaktigt ärende status eller ID" })
             }
         })
         .catch(function (error) {
